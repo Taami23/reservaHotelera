@@ -1,18 +1,24 @@
 package cl.testing.reserva.model;
 
-public class Hotel {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
+public class Hotel {
+	
+	@Id
+	@GeneratedValue
 	private Integer idHotel;
 	private String nombre;
-	private String numeroHabitaiciones;
+	private Integer numeroHabitaiciones;
 	private String direccion;
 	private String contactoTelefono;
 	private String contactoCorreo;
 	private String contrasena;
 	
-	public Hotel(Integer idHotel, String nombre, String numeroHabitaiciones, String direccion, String contactoTelefono,
+	public Hotel(String nombre, Integer numeroHabitaiciones, String direccion, String contactoTelefono,
 			String contactoCorreo, String contrasena) {
-		this.idHotel = idHotel;
 		this.nombre = nombre;
 		this.numeroHabitaiciones = numeroHabitaiciones;
 		this.direccion = direccion;
@@ -41,11 +47,11 @@ public class Hotel {
 		this.nombre = nombre;
 	}
 
-	public String getNumeroHabitaiciones() {
+	public Integer getNumeroHabitaiciones() {
 		return numeroHabitaiciones;
 	}
 
-	public void setNumeroHabitaiciones(String numeroHabitaiciones) {
+	public void setNumeroHabitaiciones(Integer numeroHabitaiciones) {
 		this.numeroHabitaiciones = numeroHabitaiciones;
 	}
 
@@ -80,9 +86,18 @@ public class Hotel {
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
-	
-	
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "Hotel{" +
+				"idHotel=" + idHotel +
+				", nombre='" + nombre + '\'' +
+				", numeroHabitaiciones=" + numeroHabitaiciones +
+				", direccion='" + direccion + '\'' +
+				", contactoTelefono='" + contactoTelefono + '\'' +
+				", contactoCorreo='" + contactoCorreo + '\'' +
+				", contrasena='" + contrasena + '\'' +
+				'}';
+	}
 }

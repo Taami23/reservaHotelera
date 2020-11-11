@@ -1,5 +1,8 @@
 package cl.testing.reserva.repository;
 
-public interface HotelRepository {
+import cl.testing.reserva.model.Hotel;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface HotelRepository extends JpaRepository <Hotel, Integer> {
 
 }
