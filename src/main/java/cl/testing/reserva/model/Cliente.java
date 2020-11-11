@@ -21,8 +21,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(int idCliente, String nombre, String rut, Date fechaNacimiento, String telefono, String correoElectrinico, String contrasena) {
-        this.idCliente = idCliente;
+    public Cliente(String nombre, String rut, Date fechaNacimiento, String telefono, String correoElectrinico, String contrasena) {
         this.nombre = nombre;
         this.rut = rut;
         this.fechaNacimiento = fechaNacimiento;
