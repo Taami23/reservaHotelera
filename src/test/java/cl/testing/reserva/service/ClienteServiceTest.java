@@ -42,7 +42,7 @@ public class ClienteServiceTest {
         //Act
         resultado = clienteService.getAllClientes();
 
-        //Asseert
+        //Assert
         assertNotNull(resultado);
         assertAll("resultado",
                 () -> assertEquals("Tamara Salgado",resultado.get(0).getNombre()),
