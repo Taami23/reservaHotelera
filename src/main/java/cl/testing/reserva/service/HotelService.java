@@ -23,4 +23,8 @@ public class HotelService {
         }
         return hotelesConName;
     }
+
+    public List<Hotel> getAllHotel(){
+        return hotelRepository.findAll();
+    }
 }

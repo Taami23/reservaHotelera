@@ -21,9 +21,14 @@ public class HotelController {
     private HotelService hotelService;
 
     @GetMapping("/{name}")
-        public ResponseEntity<List<Hotel>> getAllHotelsByName(@PathVariable String name){
-            List<Hotel> hotels = hotelService.getAllHotelsByName(name);
-            return new ResponseEntity<List<Hotel>>(hotels, HttpStatus.OK);
-        }
+    public ResponseEntity<List<Hotel>> getAllHotelsByName(@PathVariable String name) {
+        List<Hotel> hotels = hotelService.getAllHotelsByName(name);
+        return new ResponseEntity<List<Hotel>>(hotels, HttpStatus.OK);
+    }
 
+    @GetMapping("/")
+    public ResponseEntity<List<Hotel>> getAllHotel() {
+        List<Hotel> hotels = hotelService.getAllHotel();
+        return new ResponseEntity<>(hotels, HttpStatus.OK);
+    }
 }

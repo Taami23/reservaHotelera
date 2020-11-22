@@ -19,6 +19,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +61,26 @@ public class HotelControllerTest {
 		//Then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 		assertThat(response.getContentAsString()).isEqualTo(jsonListaHoteles.write(hotels).getJson());
+	}
+
+	@Test
+	void SiSeInvocaGetAllHotelYExistenHotelesDebeRetornarListaConLosHoteles() throws Exception {
+		//Given
+		ArrayList<Hotel> hotels = new ArrayList<>();
+		hotels.add(new Hotel("Hotel mi casa", 2, "Carrera 952", "65987456321", "contacto@contacto.cl", "password"));
+		hotels.add(new Hotel("Hotel la casa del terror", 7, "Libertad 390", "65987456321", "contacto@contacto.cl", "password"));
+		hotels.add(new Hotel("Hotel de hoteles", 1, "Arturo Prat 103", "65987456321", "contacto@contacto.cl", "password"));
+		hotels.add(new Hotel("Hotel casa blanca", 4, "El roble 952", "65987456321", "contacto@contacto.cl", "password"));
+
+		given(hotelService.getAllHotel()).willReturn(hotels);
+
+		MockHttpServletResponse response = mockMvc.perform(get("/reservaHoteles/hoteles/")
+				.accept(MediaType.APPLICATION_JSON)).andReturn().getResponse();
+
+		//Then
+		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+		assertThat(response.getContentAsString()).isEqualTo(jsonListaHoteles.write(hotels).getJson());
+
 	}
 
 }
