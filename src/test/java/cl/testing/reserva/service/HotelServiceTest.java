@@ -2,6 +2,8 @@ package cl.testing.reserva.service;
 
 import cl.testing.reserva.model.Hotel;
 import cl.testing.reserva.repository.HotelRepository;
+import exceptions.HotelNotFoundException;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -9,6 +11,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,4 +54,76 @@ public class HotelServiceTest {
                 ()-> assertEquals("65987456321", resultados.get(2).getContactoTelefono())
         );
     }
+    @Test
+	void siDeseaEliminarUnHotelEntoncesSeBuscaElHotelPorSuIdYSeElimina() throws HotelNotFoundException {
+		//Arrange
+		Hotel hotelBuscado = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan@gmail.com", "hotelchillan2020");
+		when(hotelRepository.getOne(1)).thenReturn(hotelBuscado);
+		
+		//Act
+		hotelService.eliminarHotel(1);
+		
+		//Assert
+		verify(hotelRepository,times(1)).delete(hotelBuscado);
+		
+		
+		
+		/*
+		assertNotNull(hotelEncontrado);
+		assertAll("hotelEncontrado",
+				() -> assertEquals(1, hotelEncontrado.getIdHotel()),
+				() -> assertEquals("Hotel Chillan".toLowerCase(), hotelEncontrado.getNombre().toLowerCase()),
+				() -> assertEquals(50, hotelEncontrado.getNumeroHabitaiciones()),
+				() -> assertEquals("Avenida Libertad 658".toLowerCase(), hotelEncontrado.getDireccion()),
+				() -> assertEquals("+56945768572", hotelEncontrado.getContactoTelefono()),
+				() -> assertEquals("hotelchillan@gmail.com", hotelEncontrado.getContactoCorreo()),
+				() -> assertEquals("hotelchillan2020", hotelEncontrado.getContrasena()));
+				*/
+	}
+    @Test
+	void siDeseaEliminarUnHotelYNoLoEncuentraEntoncesSeArrojaLaExcepcion() throws HotelNotFoundException {
+    	// Arrange
+		when(hotelRepository.getOne(1)).thenReturn(null);
+		
+		// Act + Assert
+		assertThrows(HotelNotFoundException.class, () -> 
+				hotelService.eliminarHotel(1));
+	}
+    @Test
+	void siDeseaEditarLosDatosDeUnHotelYNoLoEncuentraEntoncesSeArrojaLaExcepcion() throws HotelNotFoundException {
+    	// Arrange    	
+		Hotel hotelBuscado = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan@gmail.com", "hotelchillan2020");
+		hotelBuscado.setIdHotel(1);
+		when(hotelRepository.getOne(1)).thenReturn(null);
+		
+		// Act + Assert
+		assertThrows(HotelNotFoundException.class, () -> hotelService.editarHotel(hotelBuscado));
+		
+		
+	}
+    @Test
+   	void siDeseaEditarLosDatosDeUnHotelYLoEncuentraEntoncesDevuelveElHotelActualizado() throws HotelNotFoundException {
+       	// Arrange    	
+   		Hotel hotelBuscado = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan@gmail.com", "hotelchillan2020");
+   		Hotel hotelActualizado = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56978547865", "hotelchillan@gmail.com", "hotelchillan2020");
+
+   		hotelBuscado.setIdHotel(1);
+   		hotelActualizado.setIdHotel(1);
+   		when(hotelRepository.getOne(1)).thenReturn(hotelBuscado);
+   		when(hotelRepository.save(hotelActualizado)).thenReturn(hotelActualizado);
+   		
+   		  		
+   		// Act + Assert
+   		Hotel hotelResultado = hotelService.editarHotel(hotelActualizado);
+        assertNotNull(hotelResultado);
+        assertAll("hotelResultado",
+                ()-> assertEquals("Hotel Chillan", hotelResultado.getNombre()),
+                ()-> assertEquals(50, hotelResultado.getNumeroHabitaiciones()),
+                ()-> assertEquals("Avenida Libertdad 658", hotelResultado.getDireccion()),
+                ()-> assertEquals("+56978547865", hotelResultado.getContactoTelefono()),
+                ()-> assertEquals("hotelchillan@gmail.com", hotelResultado.getContactoCorreo()),
+                ()-> assertEquals("hotelchillan2020", hotelResultado.getContrasena()));   		
+   		
+   	} 
+    
 }
