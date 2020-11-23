@@ -2,6 +2,8 @@ package cl.testing.reserva.service;
 
 import cl.testing.reserva.model.Cliente;
 import cl.testing.reserva.repository.ClienteRepository;
+import exceptions.ClienteNotFoundException;
+import exceptions.ClientesEmptyList;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,7 +33,7 @@ public class ClienteServiceTest {
     //    private String contrasena;
 
     @Test
-    void siSeInvocaGetAllClientesDebeRetornarTodosLosClientes(){
+    void siSeInvocaGetAllClientesDebeRetornarTodosLosClientes() throws  ClientesEmptyList {
         //Arrange
         ArrayList<Cliente> clientes = new ArrayList<Cliente>();
         List<Cliente> resultado;
@@ -42,7 +44,7 @@ public class ClienteServiceTest {
         //Act
         resultado = clienteService.getAllClientes();
 
-        //Asseert
+        //Assert
         assertNotNull(resultado);
         assertAll("resultado",
                 () -> assertEquals("Tamara Salgado",resultado.get(0).getNombre()),
@@ -58,5 +60,51 @@ public class ClienteServiceTest {
                 () -> assertEquals("correito@gmail.com", resultado.get(1).getCorreoElectrinico()),
                 () -> assertEquals("holi2", resultado.get(1).getContrasena())
         );
+    }
+
+    @Test
+    void siSeInvocaGetAllClientesYNoExiteNingunClienteRetornaLaExcepcionClientesEmptyList(){
+        //Arrange
+        when(clienteRepository.findAll()).thenReturn(null);
+
+        //Act + Assert
+        assertThrows(ClientesEmptyList.class, () -> clienteService.getAllClientes());
+    }
+
+    @Test
+    void siDeseaEditarLosDatosDeUnClienteYNoExisteEntoncesSeArrojaLaExcepcionClienteNotFound() {
+        // Arrange
+        Cliente cliente = new Cliente("Tamara Salgado", "19415903k", new Date("1997/01/19"), "+56975845747", "tvale.sv@gmail.com","holi");
+        cliente.setIdCliente(1);
+        when(clienteRepository.getOne(1)).thenReturn(null);
+
+        // Act + Assert
+        assertThrows(ClienteNotFoundException.class, () -> clienteService.updateCliente(cliente));
+    }
+
+    @Test
+    void siDeseaEditarLosDatosDeUnClienteYLoExisteEntoncesDevuelveElHotelActualizado() throws ClienteNotFoundException {
+        // Arrange
+        Cliente cliente = new Cliente("Tamara Salgado", "19415903k", new Date("1997/01/19"), "+56975845747", "tvale.sv@gmail.com","holi");
+
+        cliente.setIdCliente(1);
+        when(clienteRepository.getOne(1)).thenReturn(cliente);
+        when(clienteRepository.save(cliente)).thenReturn(cliente);
+
+        cliente.setNombre("Tamara Valentina Salgado");
+
+        // Act
+        Cliente clienteResultado = clienteService.updateCliente(cliente);
+
+        //Assert
+        assertNotNull(clienteResultado);
+        assertAll("clienteResultado",
+                () -> assertEquals("Tamara Valentina Salgado",clienteResultado.getNombre()),
+                () -> assertEquals("19415903k", clienteResultado.getRut()),
+                () -> assertEquals(new Date("1997/01/19"), clienteResultado.getFechaNacimiento()),
+                () -> assertEquals("+56975845747", clienteResultado.getTelefono()),
+                () -> assertEquals("tvale.sv@gmail.com", clienteResultado.getCorreoElectrinico()),
+                () -> assertEquals("holi", clienteResultado.getContrasena())
+                );
     }
 }
