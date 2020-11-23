@@ -3,13 +3,17 @@ package cl.testing.reserva.controllers;
 import cl.testing.reserva.model.Cliente;
 import cl.testing.reserva.service.ClienteService;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.mockito.BDDMockito.will;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
+import exceptions.ClienteNotFoundException;
+import exceptions.ClientesEmptyList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,6 +41,7 @@ public class ClienteControllerTest {
     private ClienteService clienteService;
 
     private JacksonTester<List<Cliente>> jsonListaCliente;
+    private JacksonTester<Cliente> jsonCliente;
 
     @InjectMocks
     private ClienteController clienteController;
@@ -55,14 +60,70 @@ public class ClienteControllerTest {
         clientes.add(new Cliente("Juanito Alcachofa", "198762543", new Date("1996/04/24"), "+56912345678", "correito@gmail.com","holi2"));
 
         given(clienteService.getAllClientes()).willReturn(clientes);
+
         //When
         MockHttpServletResponse response = mockMvc.perform(get("/ReservaHotelera/clientes/")
                                             .accept(MediaType.APPLICATION_JSON))
                                             .andReturn()
                                             .getResponse();
+
         //Then
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
         assertThat(response.getContentAsString()).isEqualTo(jsonListaCliente.write(clientes).getJson());
     }
+
+    @Test
+    void siSeInvocaGetAllClienteYLaListaEstaVaciaDebeRetornarExcepcionEmptyList() throws Exception {
+        //Given
+        doThrow(new ClientesEmptyList()).when(clienteService).getAllClientes();
+
+        //When
+        MockHttpServletResponse response = mockMvc.perform(get("/ReservaHotelera/clientes/")
+                .accept(MediaType.APPLICATION_JSON))
+                .andReturn()
+                .getResponse();
+
+        //Then
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
+    }
+
+    @Test
+    void siSeInvocaUpdateClienteYExisteDebeRetornarClienteActualizado() throws Exception {
+        //Given
+        Cliente cliente = new Cliente("Tamara Salgado", "19415903k", new Date("1997/01/19"), "+56975845747", "tvale.sv@gmail.com","holi");
+        String nombre = "Tamara Valentina Salgado Villalobos";
+        cliente.setIdCliente(1);
+        cliente.setNombre(nombre);
+
+        //When
+        MockHttpServletResponse response = mockMvc.perform(post("/ReservaHotelera/clientes/update/1")
+                .contentType(MediaType.APPLICATION_JSON).content(jsonCliente.write(cliente).getJson()))
+                .andReturn()
+                .getResponse();
+
+        //Then
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
+        assertThat(response.equals(jsonCliente));
+    }
+
+    @Test
+    void siSeInvocaUpdateClienteYNoExisteDebeRetornarExcepcionClienteNotFound() throws Exception {
+        //Given
+        Cliente cliente = new Cliente("Tamara Salgado", "19415903k", new Date("1997/01/19"), "+56975845747", "tvale.sv@gmail.com","holi");
+        String nombre = "Tamara Valentina Salgado Villalobos";
+        cliente.setIdCliente(1);
+        cliente.setNombre(nombre);
+        given(clienteService.updateCliente(cliente)).willThrow(new ClienteNotFoundException());
+
+        //When
+        MockHttpServletResponse response = mockMvc.perform(post("/ReservaHotelera/clientes/update/1")
+                .contentType(MediaType.APPLICATION_JSON).content(jsonCliente.write(cliente).getJson()))
+                .andReturn()
+                .getResponse();
+
+        //Then
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
+    }
+
 
 }

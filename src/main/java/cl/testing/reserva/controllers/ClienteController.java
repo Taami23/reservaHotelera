@@ -4,14 +4,12 @@ import java.util.List;
 
 import cl.testing.reserva.model.Cliente;
 import cl.testing.reserva.service.ClienteService;
+import exceptions.ClienteNotFoundException;
+import exceptions.ClientesEmptyList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -22,9 +20,24 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @GetMapping("/")
-    public ResponseEntity<List<Cliente>> getAllClientes() {
-        List<Cliente> clientes = clienteService.getAllClientes();
-        return new ResponseEntity<List<Cliente>>(clientes,HttpStatus.OK);
+    public ResponseEntity<List<Cliente>> getAllClientes() throws ClientesEmptyList {
+        try{
+            List<Cliente> clientes = clienteService.getAllClientes();
+            return new ResponseEntity<>(clientes,HttpStatus.OK);
+        }catch (ClientesEmptyList e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping(path = {"/update/{id}"})
+    public ResponseEntity<Cliente> updateCliente(@PathVariable(value = "id") int id,@RequestBody Cliente cliente) {
+        try {
+            cliente.setIdCliente(id);
+            clienteService.updateCliente(cliente);
+            return new ResponseEntity<>(clienteService.updateCliente(cliente),HttpStatus.CREATED);
+        }catch (ClienteNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 }
