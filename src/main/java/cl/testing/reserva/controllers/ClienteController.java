@@ -4,8 +4,9 @@ import java.util.List;
 
 import cl.testing.reserva.model.Cliente;
 import cl.testing.reserva.service.ClienteService;
+import exceptions.ClienteAlreadyExistsException;
 import exceptions.ClienteNotFoundException;
-import exceptions.ClientesEmptyList;
+import exceptions.ClientesEmptyListException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +21,11 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @GetMapping("/")
-    public ResponseEntity<List<Cliente>> getAllClientes() throws ClientesEmptyList {
+    public ResponseEntity<List<Cliente>> getAllClientes() throws ClientesEmptyListException {
         try{
             List<Cliente> clientes = clienteService.getAllClientes();
             return new ResponseEntity<>(clientes,HttpStatus.OK);
-        }catch (ClientesEmptyList e){
+        }catch (ClientesEmptyListException e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -39,5 +40,26 @@ public class ClienteController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @PostMapping("/add")
+    public ResponseEntity<Cliente> agregarHotel(@RequestBody Cliente cliente) throws ClienteNotFoundException, ClienteAlreadyExistsException {
+        try {
+            clienteService.agregarCliente(cliente);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (ClienteAlreadyExistsException e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/delete/{id}")
+    public ResponseEntity<Cliente> delete(@PathVariable int id) throws ClienteNotFoundException {
+        try {
+            clienteService.eliminarCliente(id);
+            return new ResponseEntity<Cliente>(HttpStatus.OK);
+        } catch (ClienteNotFoundException e) {
+            return new ResponseEntity<Cliente>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 }
