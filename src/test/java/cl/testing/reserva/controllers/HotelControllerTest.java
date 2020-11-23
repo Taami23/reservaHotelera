@@ -1,7 +1,6 @@
 package cl.testing.reserva.controllers;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -9,7 +8,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import cl.testing.reserva.service.HotelService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import exceptions.HotelAlreadyExistsException;
+import exceptions.HotelNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,6 +24,7 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -72,6 +74,18 @@ public class HotelControllerTest {
 	}
 
 	@Test
+	void siSeInvocaGetAllByNameYLaListaEstaVaciaArrojaExcepcionHotelNotFound() throws Exception{
+		doThrow(new HotelNotFoundException()).when(hotelService).getAllHotelsByName("Casa");
+
+		MockHttpServletResponse response = mockMvc.perform(get("/reservaHoteles/hoteles/Casa")
+				.accept(MediaType.APPLICATION_JSON))
+				.andReturn()
+				.getResponse();
+
+		assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
+	}
+
+	@Test
 	void SiSeInvocaGetAllHotelYExistenHotelesDebeRetornarListaConLosHoteles() throws Exception {
 		//Given
 		ArrayList<Hotel> hotels = new ArrayList<>();
@@ -92,6 +106,20 @@ public class HotelControllerTest {
 	}
 
 	@Test
+	void siSeInvocaGetAllHotelYLaListaEstaVaciaArrojaHotelNotFoundExcepcion() throws Exception {
+		//Given
+		doThrow(new HotelNotFoundException()).when(hotelService).getAllHotel();
+
+		//When
+		MockHttpServletResponse response = mockMvc.perform(get("/reservaHoteles/hoteles/")
+				.accept(MediaType.APPLICATION_JSON))
+				.andReturn()
+				.getResponse();
+
+		//Then
+		assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
+	}
+	@Test
 	void siDeseaAgregarUnHotelEntoncesLoPuedeAgregar() throws Exception{
 		Hotel hotelAAgregar = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan@gmail.com", "hotelchillan2020");
 
@@ -102,6 +130,7 @@ public class HotelControllerTest {
 		assertThat(response.getContentAsString()).isEqualTo(jsonHotel.write(hotelAAgregar).getJson());
 	}
 
+	@Disabled
 	@Test
 	void siDeseaAgregarUnHotelPeroEsteYaExiste() throws Exception, HotelAlreadyExistsException {
 		Hotel hotelAAgregar = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan@gmail.com", "hotelchillan2020");
@@ -119,4 +148,63 @@ public class HotelControllerTest {
 
 	}
 
+	@Test
+	void siDeseaEliminarUnHotelEntoncesSeBuscaElHotelPorSuIdYSeElimina() throws Exception, HotelNotFoundException {
+		//Hotel hotelBuscado = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan@gmail.com", "hotelchillan2020");
+
+		MockHttpServletResponse response = mockMvc.perform(get("/reservaHoteles/hoteles/delete/1")
+				.accept(MediaType.APPLICATION_JSON)).andReturn().getResponse();
+
+		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+		verify(hotelService, times(1)).eliminarHotel(1);
+	}
+
+	@Test
+	void siDeseaEliminarUnHotelYNoLoEncuentraArrojaExcepcion() throws Exception {
+
+		doThrow(new HotelNotFoundException()).when(hotelService).eliminarHotel(1);
+
+		MockHttpServletResponse response = mockMvc.perform(get("/reservaHoteles/hoteles/delete/1")
+				.accept(MediaType.APPLICATION_JSON)).andReturn().getResponse();
+
+		assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
+		verify(hotelService, times(1)).eliminarHotel(1);
+	}
+
+	@Test
+	void siDeseaEditarLosDatosDeUnHotelYLoEncuentraEntoncesDevuelveElHotelActualizado() throws Exception {
+		Hotel hotelBuscado = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan@gmail.com", "hotelchillan2020");
+		String nuevoNombre = "Hotel Central Chillan";
+		hotelBuscado.setNombre(nuevoNombre);
+
+		//When
+		MockHttpServletResponse response = mockMvc.perform(post("/reservaHoteles/hoteles/update/1")
+				.contentType(MediaType.APPLICATION_JSON).content(jsonHotel.write(hotelBuscado).getJson()))
+				.andReturn()
+				.getResponse();
+
+		//Then
+		assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
+		assertThat(response.equals(jsonHotel));
+	}
+
+	@Disabled
+	@Test
+	void siDeseaEditarLosDatosDeUnHotelYNoLoEncuentraArrojaExcepcion() throws Exception, HotelNotFoundException, HotelAlreadyExistsException {
+		Hotel hotelBuscado = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan@gmail.com", "hotelchillan2020");
+		//String nombre = "Hotel Chillancito";
+		hotelBuscado.setIdHotel(1);
+		//hotelBuscado.setNombre(nombre);
+
+		doThrow(new HotelNotFoundException()).when(hotelService).editarHotel(hotelBuscado);
+
+		MockHttpServletResponse response = mockMvc.perform(post("/reservaHoteles/hoteles/update/1")
+				.contentType(MediaType.APPLICATION_JSON).content(jsonHotel.write(hotelBuscado).getJson()))
+				.andReturn()
+				.getResponse();
+
+
+		assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
+		verify(hotelService, times(1)).editarHotel(hotelBuscado);
+	}
 }

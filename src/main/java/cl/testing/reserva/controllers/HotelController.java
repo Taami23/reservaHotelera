@@ -22,8 +22,12 @@ public class HotelController {
 
     @GetMapping("/{name}")
     public ResponseEntity<List<Hotel>> getAllHotelsByName(@PathVariable String name) throws HotelNotFoundException {
-        List<Hotel> hotels = hotelService.getAllHotelsByName(name);
-        return new ResponseEntity<List<Hotel>>(hotels, HttpStatus.OK);
+        try{
+            List<Hotel> hotels = hotelService.getAllHotelsByName(name);
+            return new ResponseEntity<List<Hotel>>(hotels, HttpStatus.OK);
+        }catch (HotelNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/agregar")
@@ -40,28 +44,32 @@ public class HotelController {
 
     @GetMapping("/")
     public ResponseEntity<List<Hotel>> getAllHotel() throws HotelNotFoundException {
-        List<Hotel> hotels = hotelService.getAllHotel();
-        return new ResponseEntity<>(hotels, HttpStatus.OK);
+        try{
+            List<Hotel> hotels = hotelService.getAllHotel();
+            return new ResponseEntity<>(hotels, HttpStatus.OK);
+        }catch (HotelNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/delete/{id}")
-    public ResponseEntity<Hotel> delete(@PathVariable int id) {
+    public ResponseEntity<Hotel> delete(@PathVariable int id) throws HotelNotFoundException {
         try {
             hotelService.eliminarHotel(id);
         } catch (HotelNotFoundException e) {
             return new ResponseEntity<Hotel>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Hotel>(HttpStatus.OK);
+        return new ResponseEntity<Hotel>(hotelService.buscarHotel(id), HttpStatus.OK);
     }
 
     @PostMapping("/update/{id}")
     public ResponseEntity<Hotel> update(@PathVariable int id, Hotel hotel) {
         try {
             hotel.setIdHotel(id);
-            hotelService.editarHotel(hotel);
+            return new ResponseEntity<Hotel>(hotelService.editarHotel(hotel),HttpStatus.CREATED);
         } catch (HotelNotFoundException e) {
             return new ResponseEntity<Hotel>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Hotel>(HttpStatus.OK);
+
     }
 }

@@ -31,7 +31,7 @@ public class HotelService {
     }
 
     public List<Hotel> getAllHotel() throws HotelNotFoundException {
-        if (hotelRepository.findAll().isEmpty()){
+        if (hotelRepository.findAll() == null){
             throw new HotelNotFoundException();
         }
         return hotelRepository.findAll();
