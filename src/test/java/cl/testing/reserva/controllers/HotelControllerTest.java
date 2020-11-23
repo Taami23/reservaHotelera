@@ -1,9 +1,14 @@
 package cl.testing.reserva.controllers;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
 import cl.testing.reserva.service.HotelService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import exceptions.HotelAlreadyExistsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,6 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +38,8 @@ public class HotelControllerTest {
 	private HotelService hotelService;
 
 	private JacksonTester<List<Hotel>> jsonListaHoteles;
+
+	private JacksonTester<Hotel> jsonHotel;
 
 	@InjectMocks
 	private HotelController hotelController;
@@ -80,6 +88,34 @@ public class HotelControllerTest {
 		//Then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 		assertThat(response.getContentAsString()).isEqualTo(jsonListaHoteles.write(hotels).getJson());
+
+	}
+
+	@Test
+	void siDeseaAgregarUnHotelEntoncesLoPuedeAgregar() throws Exception{
+		Hotel hotelAAgregar = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan@gmail.com", "hotelchillan2020");
+
+		MockHttpServletResponse response = mockMvc.perform(post("/reservaHoteles/hoteles/agregar")
+				.contentType(MediaType.APPLICATION_JSON).content(jsonHotel.write(hotelAAgregar).getJson())).andReturn().getResponse();
+
+		assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
+		assertThat(response.getContentAsString()).isEqualTo(jsonHotel.write(hotelAAgregar).getJson());
+	}
+
+	@Test
+	void siDeseaAgregarUnHotelPeroEsteYaExiste() throws Exception, HotelAlreadyExistsException {
+		Hotel hotelAAgregar = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan@gmail.com", "hotelchillan2020");
+
+		//given(hotelService.getHotelByCorreo(hotelAAgregar.getContactoCorreo())).willThrow(new HotelAlreadyExistsException());
+		//given(hotelService.getHotelByCorreo(hotelAAgregar.getContactoCorreo())).willReturn(hotelAAgregar);
+		//when(hotelService.getHotelByCorreo(hotelAAgregar.getContactoCorreo())).thenReturn(hotelAAgregar);
+		//doThrow(new HotelAlreadyExistsException()).when(hotelService).agregarHotel(hotelAAgregar);
+
+		MockHttpServletResponse response = mockMvc.perform(post("/reservaHoteles/hoteles/agregar")
+				.contentType(MediaType.APPLICATION_JSON).content(jsonHotel.write(hotelAAgregar).getJson())).andReturn().getResponse();
+
+		assertThat(response.getStatus()).isEqualTo(HttpStatus.CONFLICT.value());
+		//assertThat(response.getContentAsString()).isEqualTo(jsonHotel.write(hotelAAgregar).getJson());
 
 	}
 

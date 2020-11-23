@@ -2,6 +2,7 @@ package cl.testing.reserva.service;
 
 import cl.testing.reserva.model.Hotel;
 import cl.testing.reserva.repository.HotelRepository;
+import exceptions.HotelAlreadyExistsException;
 import exceptions.HotelNotFoundException;
 
 import org.junit.jupiter.api.Test;
@@ -10,10 +11,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class HotelServiceTest {
     private HotelService hotelService;
 
     @Test
-    void siSeInvocaGetAllByNamesYExistenHotelesConEseNombreDebeRetornarUnaListaConLosHoteles(){
+    void siSeInvocaGetAllByNamesYExistenHotelesConEseNombreDebeRetornarUnaListaConLosHoteles() throws HotelNotFoundException {
         //Arrange
         ArrayList<Hotel> hotels = new ArrayList<Hotel>();
         List<Hotel> resultados;
@@ -54,6 +54,76 @@ public class HotelServiceTest {
                 ()-> assertEquals("65987456321", resultados.get(2).getContactoTelefono())
         );
     }
+
+    @Test
+	void siSeInvocaGetAllByNamesYNoExistenHotelesConEseNombreArrojaExcepcion() throws HotelNotFoundException{
+
+    	assertThrows(HotelNotFoundException.class, () -> hotelService.getAllHotelsByName("Casa"));
+	}
+
+	@Test
+	void siSeInvocaGetAllHotelYExistenHotelesDebeRetornarUnaListaConLosHoteles() throws HotelNotFoundException{
+		ArrayList<Hotel> hotels = new ArrayList<Hotel>();
+		List<Hotel> resultados;
+		hotels.add(new Hotel("Hotel mi casa", 2, "Carrera 952", "65987456321", "contacto@contacto.cl", "password"));
+		hotels.add(new Hotel("Hotel la casa del terror", 7, "Libertad 390", "65987456321", "contacto@contacto.cl", "password"));
+
+		when(hotelRepository.findAll()).thenReturn(hotels);
+
+		resultados = hotelService.getAllHotel();
+		assertNotNull(resultados);
+		assertAll("resultados",
+				()-> assertEquals("Hotel mi casa", resultados.get(0).getNombre()),
+				()-> assertEquals(2, resultados.get(0).getNumeroHabitaiciones()),
+				()-> assertEquals("Carrera 952", resultados.get(0).getDireccion()),
+				()-> assertEquals("65987456321", resultados.get(0).getContactoTelefono()),
+				()-> assertEquals("Hotel la casa del terror", resultados.get(1).getNombre()),
+				()-> assertEquals(7, resultados.get(1).getNumeroHabitaiciones()),
+				()-> assertEquals("Libertad 390", resultados.get(1).getDireccion()),
+				()-> assertEquals("65987456321", resultados.get(1).getContactoTelefono())
+		);
+	}
+
+	@Test
+	void siSeInvocaGetAllHotelYNoExistenHotelesArrojaExcepcion() throws HotelNotFoundException{
+		assertThrows(HotelNotFoundException.class, () -> hotelService.getAllHotel());
+	}
+
+	@Test
+	void siDeseaAgregarUnHotelEntoncesLoPuedeAgregar() throws HotelAlreadyExistsException, HotelNotFoundException {
+    	//Arrange
+		List<Hotel> hotels = new ArrayList<>();
+		Hotel hotelAAgregar = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan@gmail.com", "hotelchillan2020");
+		when(hotelService.getHotelByCorreo(hotelAAgregar.getContactoCorreo())).thenReturn(null);
+		Hotel hotelExistente = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan2@gmail.com", "hotelchillan2020");
+		Hotel hotelExistente1 = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan1@gmail.com", "hotelchillan2020");
+		hotels.add(hotelExistente);
+		hotels.add(hotelExistente1);
+		when(hotelRepository.findAll()).thenReturn(hotels);
+
+
+
+		hotelService.agregarHotel(hotelAAgregar);
+
+		verify(hotelRepository, times(1)).save(hotelAAgregar);
+	}
+
+	@Test
+	void siDeseaAgregarUnHotelYEsteYaExisteArrojaExcepcion() throws HotelAlreadyExistsException, HotelNotFoundException {
+		//Arrange
+		List<Hotel> hotels = new ArrayList<Hotel>();
+		Hotel hotelAAgregar = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan@gmail.com", "hotelchillan2020");
+		Hotel hotelExistente = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan@gmail.com", "hotelchillan2020");
+		Hotel hotelExistente1 = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan1@gmail.com", "hotelchillan2020");
+		hotels.add(hotelExistente);
+		hotels.add(hotelExistente1);
+		when(hotelRepository.findAll()).thenReturn(hotels);
+		//doReturn(hotelExistente).when(hotelService).getHotelByCorreo(hotelAAgregar.getContactoCorreo());
+
+
+
+		assertThrows(HotelAlreadyExistsException.class, ()-> hotelService.agregarHotel(hotelAAgregar));
+	}
     @Test
 	void siDeseaEliminarUnHotelEntoncesSeBuscaElHotelPorSuIdYSeElimina() throws HotelNotFoundException {
 		//Arrange
@@ -89,6 +159,7 @@ public class HotelServiceTest {
 		assertThrows(HotelNotFoundException.class, () -> 
 				hotelService.eliminarHotel(1));
 	}
+
     @Test
 	void siDeseaEditarLosDatosDeUnHotelYNoLoEncuentraEntoncesSeArrojaLaExcepcion() throws HotelNotFoundException {
     	// Arrange    	
