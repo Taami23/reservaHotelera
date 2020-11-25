@@ -105,7 +105,7 @@ public class ClienteControllerTest {
         assertThat(response.equals(jsonCliente));
     }
 
-    @Disabled
+
     @Test
     void siSeInvocaUpdateClienteYNoExisteDebeRetornarExcepcionClienteNotFound() throws Exception {
         //Given
@@ -137,12 +137,12 @@ public class ClienteControllerTest {
 
 
     //ARREGLARLO
-    @Disabled
+
     @Test
     void siDeseaAgregarUnHotelPeroEsteYaExiste() throws Exception, ClienteAlreadyExistsException {
         Cliente cliente = new Cliente("Tamara Salgado", "19415903k", new Date("1997/01/19"), "+56975845747", "tvale.sv@gmail.com","holi");
 //        when(clienteService.getClienteByCorreo(cliente.getCorreoElectrinico())).thenReturn(null);
-//        doThrow(new ClienteNotFoundException()).when(clienteService).agregarCliente(cliente);
+        doThrow(new ClienteNotFoundException()).when(clienteService).agregarCliente(cliente);
 
         MockHttpServletResponse response = mockMvc.perform(post("/ReservaHotelera/clientes/add")
                 .contentType(MediaType.APPLICATION_JSON).content(jsonCliente.write(cliente).getJson()).accept(MediaType.APPLICATION_JSON))
