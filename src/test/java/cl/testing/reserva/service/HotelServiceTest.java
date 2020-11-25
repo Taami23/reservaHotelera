@@ -85,10 +85,12 @@ public class HotelServiceTest {
 		);
 	}
 
-	@Disabled
+
 	@Test
 	void siSeInvocaGetAllHotelYNoExistenHotelesArrojaExcepcion() throws HotelNotFoundException{
-		assertThrows(HotelNotFoundException.class, () -> hotelService.getAllHotel());
+		//when(hotelRepository.findAll()).thenReturn(null);git s
+    	assertThrows(HotelNotFoundException.class, () -> hotelService.getAllHotel());
+
 	}
 
 	@Test
