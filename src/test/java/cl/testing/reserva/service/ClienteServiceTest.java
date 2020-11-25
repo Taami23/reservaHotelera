@@ -67,8 +67,8 @@ public class ClienteServiceTest {
 
     @Test
     void siSeInvocaGetAllClientesYNoExiteNingunClienteRetornaLaExcepcionClientesEmptyList(){
-        //Arrange
-        when(clienteRepository.findAll()).thenReturn(null);
+//        //Arrange
+//        when(clienteRepository.findAll()).thenReturn(null);
 
         //Act + Assert
         assertThrows(ClientesEmptyListException.class, () -> clienteService.getAllClientes());

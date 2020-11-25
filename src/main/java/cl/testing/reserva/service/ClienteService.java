@@ -18,7 +18,7 @@ public class ClienteService {
     private ClienteRepository clienteRepository;
 
     public List<Cliente> getAllClientes() throws ClientesEmptyListException {
-        if(clienteRepository.findAll() == null) {
+        if(clienteRepository.findAll().isEmpty()) {
             throw new ClientesEmptyListException();
         }
         return clienteRepository.findAll();

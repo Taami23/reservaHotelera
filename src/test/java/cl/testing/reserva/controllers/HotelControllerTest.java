@@ -130,7 +130,6 @@ public class HotelControllerTest {
 		assertThat(response.getContentAsString()).isEqualTo(jsonHotel.write(hotelAAgregar).getJson());
 	}
 
-	@Disabled
 	@Test
 	void siDeseaAgregarUnHotelPeroEsteYaExiste() throws Exception, HotelAlreadyExistsException {
 		Hotel hotelAAgregar = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan@gmail.com", "hotelchillan2020");
@@ -188,7 +187,6 @@ public class HotelControllerTest {
 		assertThat(response.equals(jsonHotel));
 	}
 
-	@Disabled
 	@Test
 	void siDeseaEditarLosDatosDeUnHotelYNoLoEncuentraArrojaExcepcion() throws Exception, HotelNotFoundException, HotelAlreadyExistsException {
 		Hotel hotelBuscado = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan@gmail.com", "hotelchillan2020");
