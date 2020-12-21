@@ -35,7 +35,7 @@ public class ClienteControllerTest {
 
     @Mock
     private ClienteService clienteService;
-
+    @Mock
     private JacksonTester<List<Cliente>> jsonListaCliente;
 
     @InjectMocks

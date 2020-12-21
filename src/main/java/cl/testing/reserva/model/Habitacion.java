@@ -1,18 +1,24 @@
 package cl.testing.reserva.model;
 
-public class Habitacion {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-	private int idHabitacion;
-	private int numeroHabitacion;
-	private int precioHabitacion;
-	private char pisoHabitacion;
-	private boolean enUso;
+@Entity
+public class Habitacion {
+	@Id
+	@GeneratedValue
+	private Integer idHabitacion;
+	private String numeroHabitacion;
+	private Integer precioHabitacion;
+	private Integer pisoHabitacion;
+	private Integer enUso;
 	
 	public Habitacion() {
 		
 	}
 	
-	public Habitacion(int idHabitacion,int numeroHabitacion, int precioHabitacion, char pisoHabitacion,boolean enUso) {
+	public Habitacion(Integer idHabitacion, String numeroHabitacion, Integer precioHabitacion, Integer pisoHabitacion, Integer enUso) {
 		this.idHabitacion=idHabitacion;
 		this.numeroHabitacion=numeroHabitacion;
 		this.precioHabitacion=precioHabitacion;
@@ -22,39 +28,36 @@ public class Habitacion {
 	
 	
 	
-	public int getIdHabitacion() {
+	public Integer getIdHabitacion() {
 		return idHabitacion;
 	}
-	public void setIdHabitacion(int idHabitacion) {
+	public void setIdHabitacion(Integer idHabitacion) {
 		this.idHabitacion = idHabitacion;
 	}
-	public int getNumeroHabitacion() {
+	public String getNumeroHabitacion() {
 		return numeroHabitacion;
 	}
-	public void setNumeroHabitacion(int numeroHabitacion) {
+	public void setNumeroHabitacion(String numeroHabitacion) {
 		this.numeroHabitacion = numeroHabitacion;
 	}
-	public int getPrecioHabitacion() {
+	public Integer getPrecioHabitacion() {
 		return precioHabitacion;
 	}
-	public void setPrecioHabitacion(int precioHabitacion) {
+	public void setPrecioHabitacion(Integer precioHabitacion) {
 		this.precioHabitacion = precioHabitacion;
 	}
-	public char getPisoHabitacion() {
+	public Integer getPisoHabitacion() {
 		return pisoHabitacion;
 	}
-	public void setPisoHabitacion(char pisoHabitacion) {
+	public void setPisoHabitacion(Integer pisoHabitacion) {
 		this.pisoHabitacion = pisoHabitacion;
 	}
-	public boolean isEnUso() {
+	public Integer isEnUso() {
 		return enUso;
 	}
-	public void setEnUso(boolean enUso) {
+	public void setEnUso(Integer enUso) {
 		this.enUso = enUso;
 	}
-	
-	//public void listAllHabitaciones() {
-	//}
 
 	@Override
 	public String toString() {
