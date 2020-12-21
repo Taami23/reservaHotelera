@@ -38,7 +38,6 @@ public class HabitacionController {
 	@GetMapping("/{name}")
     public ResponseEntity<Habitacion> getHabitacionById(@PathVariable int id) throws HabitacionNotFoundException {
         Habitacion habitacion = habitacionService.buscarHabitacion(id);
-		System.out.println("caca");
         return new ResponseEntity<Habitacion>(habitacion, HttpStatus.OK);
     }
 	

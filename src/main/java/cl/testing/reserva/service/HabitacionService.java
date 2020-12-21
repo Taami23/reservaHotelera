@@ -57,7 +57,6 @@ public class HabitacionService {
 		if (getHabitacionByNumero(habitacion.getNumeroHabitacion()) == null) {
 			habitacionRepository.save(habitacion);
 		}else{
-			System.out.println("EXCEPTION");
 			throw new HabitacionAlreadyExistException();
 		}
 	}

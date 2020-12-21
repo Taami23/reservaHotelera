@@ -18,7 +18,7 @@ public class Habitacion {
 		
 	}
 	
-	public Habitacion(Integer idHabitacion, String numeroHabitacion, Integer precioHabitacion, Integer pisoHabitacion, Integer enUso) {
+	public Habitacion(String numeroHabitacion, Integer precioHabitacion, Integer pisoHabitacion, Integer enUso) {
 		this.idHabitacion=idHabitacion;
 		this.numeroHabitacion=numeroHabitacion;
 		this.precioHabitacion=precioHabitacion;

@@ -36,7 +36,6 @@ public class ClienteController {
         try {
             cliente.setIdCliente(id);
             clienteService.updateCliente(cliente);
-            System.out.println(cliente.toString());
             return new ResponseEntity<>(clienteService.updateCliente(cliente),HttpStatus.CREATED);
         }catch (ClienteNotFoundException e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
