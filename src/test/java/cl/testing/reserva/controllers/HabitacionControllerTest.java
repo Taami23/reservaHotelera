@@ -9,11 +9,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+
+import exceptions.HabitacionEmptyListException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.doThrow;
@@ -23,13 +24,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import cl.testing.reserva.controllers.HabitacionController;
 import cl.testing.reserva.model.Habitacion;
 import cl.testing.reserva.service.HabitacionService;
 import exceptions.HabitacionAlreadyExistException;
@@ -41,9 +39,8 @@ public class HabitacionControllerTest {
 	
 	@Mock
 	private HabitacionService habitacionService;
-	@Mock
+
 	private JacksonTester<List<Habitacion>> jsonListaHabitacion;
-	@Mock
 	private JacksonTester<Habitacion> jsonHabitacion;
 	
 	@InjectMocks
@@ -61,9 +58,9 @@ public class HabitacionControllerTest {
 	void SiSeInvocaGetAllHabitacionesYExistenDebeRetornarListaConHabitaciones() throws Exception{
 		//Given
 		ArrayList<Habitacion> habitaciones=new ArrayList<Habitacion>();
-		habitaciones.add(new Habitacion(1,"1",15000,2,0));
-		habitaciones.add(new Habitacion(6,"6",17000,2,0));
-		habitaciones.add(new Habitacion(11,"11",18000,2,0));
+		habitaciones.add(new Habitacion("1",15000,2,0));
+		habitaciones.add(new Habitacion("6",17000,2,0));
+		habitaciones.add(new Habitacion("11",18000,2,0));
 		
 		given(habitacionService.getAllHabitaciones()).willReturn(habitaciones);
 		
@@ -75,14 +72,12 @@ public class HabitacionControllerTest {
 					
 		//Then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-		//assertThat(response.getContentAsString()).isEqualTo(
-				//jsonListaHabitacion.write(habitaciones).getJson()
-		//);
+		assertThat(response.getContentAsString()).isEqualTo(jsonListaHabitacion.write(habitaciones).getJson());
 	}
 	
 	@Test 
-	void siSeInvocaGetAllHabitacionesyLaListaEstaVaciaArrojaExceptionHabitacionNotFound() throws Exception{
-		doThrow(new HabitacionNotFoundException()).when(habitacionService).getAllHabitaciones();
+	void siSeInvocaGetAllHabitacionesyLaListaEstaVaciaArrojaExceptionHabitacionEmptyList() throws Exception{
+		doThrow(new HabitacionEmptyListException()).when(habitacionService).getAllHabitaciones();
 		
 		MockHttpServletResponse response = mockMvc.perform(get("/ReservaHotelera/habitaciones/")
 				.accept(MediaType.APPLICATION_JSON))
@@ -96,7 +91,7 @@ public class HabitacionControllerTest {
 	//agregar
 	@Test
 	void SiDeseaAgregarUnaHAbitacionYSePuede() throws Exception {
-		Habitacion habitacionAgregar = new Habitacion(31,"31",15000,2,0);
+		Habitacion habitacionAgregar = new Habitacion("31",15000,2,0);
 		
 		MockHttpServletResponse response= mockMvc.perform(post("/ReservaHotelera/habitaciones/agregar")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -111,7 +106,7 @@ public class HabitacionControllerTest {
 	
 	@Test
 	void siDeseaAgregarUnaHabitacionPeroYaExisteLanzaException() throws Exception, HabitacionAlreadyExistException{
-		Habitacion habitacionAgregar = new Habitacion(1,"1",15000,2,0);
+		Habitacion habitacionAgregar = new Habitacion("1",15000,2,0);
 		
 		doThrow(new HabitacionAlreadyExistException()).when(habitacionService).agregarHabitacion(ArgumentMatchers.any(Habitacion.class));
 		
@@ -125,7 +120,7 @@ public class HabitacionControllerTest {
 	@Test
 	void siDeseaEliminarUnaHabitacionEntoncesSeBuscaLaHabitacionPorSuIdYSeElimina() throws Exception, HabitacionNotFoundException {
 		
-		Habitacion habitacionBuscada = new Habitacion(1,"1",15000,2,0);
+		Habitacion habitacionBuscada = new Habitacion("1",15000,2,0);
 		MockHttpServletResponse response = mockMvc.perform(get("/ReservaHotelera/habitaciones/delete/1")
 				.accept(MediaType.APPLICATION_JSON)).andReturn().getResponse();
 
@@ -150,7 +145,7 @@ public class HabitacionControllerTest {
 	//editar
 	@Test
 	void siDeseaEditarLosDatosDeUnaHabitacionYLoEncuentraEntoncesDevuelveLaHabitacionActualizada() throws Exception {
-		Habitacion habitacionBuscada = new Habitacion(1,"1",15000,2,0);
+		Habitacion habitacionBuscada = new Habitacion("1",15000,2,0);
 		int nuevoPrecio = 12300;
 		habitacionBuscada.setPrecioHabitacion(nuevoPrecio);
 
@@ -168,7 +163,7 @@ public class HabitacionControllerTest {
 	
 	@Test
 	void SiDeseaEditarLosDatosDeUnaHabitacionYNoLaEncuentraArrojaException() throws Exception, HabitacionNotFoundException, HabitacionAlreadyExistException{
-		Habitacion habitacionBuscada= new Habitacion(1,"1",15000,2,0);
+		Habitacion habitacionBuscada= new Habitacion("1",15000,2,0);
 		habitacionBuscada.setIdHabitacion(1);
 		
 		doThrow(new HabitacionNotFoundException()).when(habitacionService).editarHabitacion(ArgumentMatchers.any(Habitacion.class));
@@ -180,7 +175,6 @@ public class HabitacionControllerTest {
 
 		//Then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
-		verify(habitacionService, times(1)).editarHabitacion(habitacionBuscada);
 	}
 	
 	

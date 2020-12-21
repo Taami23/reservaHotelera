@@ -2,6 +2,7 @@ package cl.testing.reserva.controllers;
 
 import java.util.List;
 
+import exceptions.HabitacionEmptyListException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,19 +27,24 @@ public class HabitacionController {
 	
 	@GetMapping("/")
 	public ResponseEntity<List<Habitacion>> getAllHabitaciones() throws Exception{
-		List<Habitacion> habitaciones = habitacionService.getAllHabitaciones();
-		return new ResponseEntity<List<Habitacion>>(habitaciones,HttpStatus.OK);
+		try{
+			List<Habitacion> habitaciones = habitacionService.getAllHabitaciones();
+			return new ResponseEntity<>(habitaciones,HttpStatus.OK);
+		}catch (HabitacionEmptyListException e){
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 	@GetMapping("/{name}")
-    public ResponseEntity<List<Habitacion>> getAllHabitacionessByNumber(@PathVariable Integer numero) throws HabitacionNotFoundException {
-        List<Habitacion> habitaciones = habitacionService.getAllHabitacionesByNumber(numero);
-        return new ResponseEntity<List<Habitacion>>(habitaciones, HttpStatus.OK);
+    public ResponseEntity<Habitacion> getHabitacionById(@PathVariable int id) throws HabitacionNotFoundException {
+        Habitacion habitacion = habitacionService.buscarHabitacion(id);
+		System.out.println("caca");
+        return new ResponseEntity<Habitacion>(habitacion, HttpStatus.OK);
     }
 	
-	@GetMapping("/agregar")
+	@PostMapping("/agregar")
 	public ResponseEntity<Habitacion> agregarHabitacion(@RequestBody Habitacion habitacion) throws
-	HabitacionNotFoundException, HabitacionAlreadyExistException{
+	HabitacionNotFoundException{
 		try {
 			habitacionService.agregarHabitacion(habitacion);
 			return new ResponseEntity<>(habitacion, HttpStatus.CREATED);
@@ -68,9 +74,4 @@ public class HabitacionController {
 	        }
 
 	    }
-
-	
-	
-	
-	
 }
