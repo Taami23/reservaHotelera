@@ -98,14 +98,11 @@ public class HotelServiceTest {
     	//Arrange
 		List<Hotel> hotels = new ArrayList<>();
 		Hotel hotelAAgregar = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan@gmail.com", "hotelchillan2020");
-		when(hotelService.getHotelByCorreo(hotelAAgregar.getContactoCorreo())).thenReturn(null);
 		Hotel hotelExistente = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan2@gmail.com", "hotelchillan2020");
 		Hotel hotelExistente1 = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan1@gmail.com", "hotelchillan2020");
 		hotels.add(hotelExistente);
 		hotels.add(hotelExistente1);
 		when(hotelRepository.findAll()).thenReturn(hotels);
-
-
 
 		hotelService.agregarHotel(hotelAAgregar);
 

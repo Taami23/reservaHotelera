@@ -116,13 +116,11 @@ public class ClienteServiceTest {
         //Arrange
         List<Cliente> clientes = new ArrayList<>();
         Cliente cliente = new Cliente("Tamara Salgado", "19415903k", new Date("1997/01/19"), "+56975845747", "tvale.sv@gmail.com","holi");
-        when(clienteService.getClienteByCorreo(cliente.getCorreoElectrinico())).thenReturn(null);
         Cliente clienteExistente = new Cliente("Tamara Valentina Salgado", "19415903k", new Date("1997/01/19"), "+56977845747", "tvale.sv1@gmail.com","holi");
         clientes.add(clienteExistente);
         when(clienteRepository.findAll()).thenReturn(clientes);
 
         clienteService.agregarCliente(cliente);
-
         verify(clienteRepository, times(1)).save(cliente);
     }
 

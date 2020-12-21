@@ -5,13 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a418a98b-6002-43a9-afa7-ab091f11aaad" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/ReservaApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/service/ClienteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/service/ClienteService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/controllers/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/controllers/ClienteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/service/HotelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/service/HotelService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/initDB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/initDB.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/populateDB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/populateDB.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/controllers/ClienteControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/controllers/ClienteControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/controllers/HotelControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/controllers/HotelControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/service/ClienteServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/service/ClienteServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cl/testing/reserva/service/ClienteService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cl/testing/reserva/service/ClienteService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/service/HotelServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/service/HotelServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cl/testing/reserva/controllers/ClienteController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cl/testing/reserva/controllers/ClienteController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cl/testing/reserva/model/Cliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cl/testing/reserva/model/Cliente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cl/testing/reserva/repository/ClienteRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cl/testing/reserva/repository/ClienteRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cl/testing/reserva/service/HotelService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cl/testing/reserva/service/HotelService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/db/initDB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db/initDB.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/db/populateDB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db/populateDB.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/exceptions/ClienteAlreadyExistsException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/exceptions/ClienteAlreadyExistsException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/exceptions/ClienteNotFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/exceptions/ClienteNotFoundException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/exceptions/ClientesEmptyListException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/exceptions/ClientesEmptyListException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/cl/testing/reserva/controllers/ClienteControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/cl/testing/reserva/controllers/ClienteControllerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/cl/testing/reserva/controllers/HotelControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/cl/testing/reserva/controllers/HotelControllerTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/cl/testing/reserva/service/ClienteServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/cl/testing/reserva/service/ClienteServiceTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/cl/testing/reserva/service/HotelServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/cl/testing/reserva/service/HotelServiceTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,12 +62,18 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="hsqldb" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1606087641104" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../WebOO2/SpringEcommerce" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../camillas" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -65,7 +89,7 @@
       <recent name="exceptions" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.HotelControllerTest">
+  <component name="RunManager" selected="Spring Boot.ReservaApplication">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -77,7 +101,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ClienteControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ClienteControllerTest.siDeseaAgregarUnClientePeroEsteYaExiste" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="reservaHotelera" />
       <extension name="coverage">
         <pattern>
@@ -87,22 +111,8 @@
       </extension>
       <option name="PACKAGE_NAME" value="cl.testing.reserva.controllers" />
       <option name="MAIN_CLASS_NAME" value="cl.testing.reserva.controllers.ClienteControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ClienteServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="reservaHotelera" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cl.testing.reserva.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cl.testing.reserva.service" />
-      <option name="MAIN_CLASS_NAME" value="cl.testing.reserva.service.ClienteServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="siDeseaAgregarUnClientePeroEsteYaExiste" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -122,47 +132,62 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HotelServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="HotelControllerTest.siDeseaAgregarUnHotelPeroEsteYaExiste" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="reservaHotelera" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="cl.testing.reserva.service.*" />
+          <option name="PATTERN" value="cl.testing.reserva.controllers.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="cl.testing.reserva.service" />
-      <option name="MAIN_CLASS_NAME" value="cl.testing.reserva.service.HotelServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="cl.testing.reserva.controllers" />
+      <option name="MAIN_CLASS_NAME" value="cl.testing.reserva.controllers.HotelControllerTest" />
+      <option name="METHOD_NAME" value="siDeseaAgregarUnHotelPeroEsteYaExiste" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HotelServiceTest.siSeInvocaGetAllHotelYNoExistenHotelesArrojaExcepcion" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="HotelControllerTest.siDeseaEditarLosDatosDeUnHotelYNoLoEncuentraArrojaExcepcion" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="reservaHotelera" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="cl.testing.reserva.service.*" />
+          <option name="PATTERN" value="cl.testing.reserva.controllers.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="cl.testing.reserva.service" />
-      <option name="MAIN_CLASS_NAME" value="cl.testing.reserva.service.HotelServiceTest" />
-      <option name="METHOD_NAME" value="siSeInvocaGetAllHotelYNoExistenHotelesArrojaExcepcion" />
+      <option name="PACKAGE_NAME" value="cl.testing.reserva.controllers" />
+      <option name="MAIN_CLASS_NAME" value="cl.testing.reserva.controllers.HotelControllerTest" />
+      <option name="METHOD_NAME" value="siDeseaEditarLosDatosDeUnHotelYNoLoEncuentraArrojaExcepcion" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReservaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="reservaHotelera" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cl.testing.reserva.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cl.testing.reserva.ReservaApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.ReservaApplication" />
         <item itemvalue="JUnit.HotelControllerTest" />
-        <item itemvalue="JUnit.HotelServiceTest" />
-        <item itemvalue="JUnit.ClienteControllerTest" />
-        <item itemvalue="JUnit.ClienteServiceTest" />
-        <item itemvalue="JUnit.HotelServiceTest.siSeInvocaGetAllHotelYNoExistenHotelesArrojaExcepcion" />
+        <item itemvalue="JUnit.HotelControllerTest.siDeseaEditarLosDatosDeUnHotelYNoLoEncuentraArrojaExcepcion" />
+        <item itemvalue="JUnit.HotelControllerTest.siDeseaAgregarUnHotelPeroEsteYaExiste" />
+        <item itemvalue="JUnit.ClienteControllerTest.siDeseaAgregarUnClientePeroEsteYaExiste" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -180,13 +205,29 @@
       <workItem from="1606150432616" duration="2713000" />
       <workItem from="1606168485642" duration="13000" />
       <workItem from="1606332884845" duration="308000" />
+      <workItem from="1606629848976" duration="1227000" />
+      <workItem from="1606631232136" duration="17000" />
+      <workItem from="1607190788347" duration="1372000" />
+      <workItem from="1607222391630" duration="349000" />
+      <workItem from="1607985226471" duration="1810000" />
+      <workItem from="1608347496666" duration="7000" />
+      <workItem from="1608347586340" duration="610000" />
+      <workItem from="1608513056055" duration="6493000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="185" y="249" key="#SQL_Dialects" timestamp="1608516270937">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="185" y="249" key="#SQL_Dialects/0.0.1536.824/260.-768.1366.728@0.0.1536.824" timestamp="1608516270937" />
+    <state x="418" y="176" width="814" height="550" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608519370854">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="418" y="176" width="814" height="550" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/260.-768.1366.728@0.0.1536.824" timestamp="1608519370854" />
     <state x="93" y="93" width="1350" height="638" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1606108379159">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -199,51 +240,60 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="618" y="302" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1536.824/1920.95.1440.860@0.0.1536.824" timestamp="1606091176021" />
-    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1606168489793">
+    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1608518553131">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824/1920.95.1440.860@0.0.1536.824" timestamp="1606168489793" />
     <state x="2435" y="270" key="FileChooserDialogImpl/0.0.1536.824/1920.95.1440.860@1920.95.1440.860" timestamp="1606155629996" />
-    <state width="1493" height="271" key="GridCell.Tab.0.bottom" timestamp="1606333560000">
+    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824/260.-768.1366.728@0.0.1536.824" timestamp="1608518553131" />
+    <state width="1493" height="244" key="GridCell.Tab.0.bottom" timestamp="1608518869853">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="313" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.95.1440.860@0.0.1536.824" timestamp="1606150491315" />
     <state width="1397" height="279" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.95.1440.860@1920.95.1440.860" timestamp="1606333176909" />
-    <state width="1493" height="271" key="GridCell.Tab.0.bottom/0.0.1536.824/260.-768.1366.728@0.0.1536.824" timestamp="1606333560000" />
-    <state width="1493" height="271" key="GridCell.Tab.0.center" timestamp="1606333559999">
+    <state width="1493" height="244" key="GridCell.Tab.0.bottom/0.0.1536.824/260.-768.1366.728@0.0.1536.824" timestamp="1608518869853" />
+    <state width="1493" height="244" key="GridCell.Tab.0.center" timestamp="1608518869852">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="313" key="GridCell.Tab.0.center/0.0.1536.824/1920.95.1440.860@0.0.1536.824" timestamp="1606150491315" />
     <state width="1397" height="279" key="GridCell.Tab.0.center/0.0.1536.824/1920.95.1440.860@1920.95.1440.860" timestamp="1606333176909" />
-    <state width="1493" height="271" key="GridCell.Tab.0.center/0.0.1536.824/260.-768.1366.728@0.0.1536.824" timestamp="1606333559999" />
-    <state width="1493" height="271" key="GridCell.Tab.0.left" timestamp="1606333559999">
+    <state width="1493" height="244" key="GridCell.Tab.0.center/0.0.1536.824/260.-768.1366.728@0.0.1536.824" timestamp="1608518869852" />
+    <state width="1493" height="244" key="GridCell.Tab.0.left" timestamp="1608518869852">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="313" key="GridCell.Tab.0.left/0.0.1536.824/1920.95.1440.860@0.0.1536.824" timestamp="1606150491315" />
     <state width="1397" height="279" key="GridCell.Tab.0.left/0.0.1536.824/1920.95.1440.860@1920.95.1440.860" timestamp="1606333176909" />
-    <state width="1493" height="271" key="GridCell.Tab.0.left/0.0.1536.824/260.-768.1366.728@0.0.1536.824" timestamp="1606333559999" />
-    <state width="1493" height="271" key="GridCell.Tab.0.right" timestamp="1606333560000">
+    <state width="1493" height="244" key="GridCell.Tab.0.left/0.0.1536.824/260.-768.1366.728@0.0.1536.824" timestamp="1608518869852" />
+    <state width="1493" height="244" key="GridCell.Tab.0.right" timestamp="1608518869852">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="313" key="GridCell.Tab.0.right/0.0.1536.824/1920.95.1440.860@0.0.1536.824" timestamp="1606150491315" />
     <state width="1397" height="279" key="GridCell.Tab.0.right/0.0.1536.824/1920.95.1440.860@1920.95.1440.860" timestamp="1606333176909" />
-    <state width="1493" height="271" key="GridCell.Tab.0.right/0.0.1536.824/260.-768.1366.728@0.0.1536.824" timestamp="1606333560000" />
-    <state width="1493" height="243" key="GridCell.Tab.1.bottom" timestamp="1606121882937">
+    <state width="1493" height="244" key="GridCell.Tab.0.right/0.0.1536.824/260.-768.1366.728@0.0.1536.824" timestamp="1608518869852" />
+    <state width="1493" height="244" key="GridCell.Tab.1.bottom" timestamp="1608518869854">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="243" key="GridCell.Tab.1.bottom/0.0.1536.824/1920.95.1440.860@0.0.1536.824" timestamp="1606121882937" />
-    <state width="1493" height="243" key="GridCell.Tab.1.center" timestamp="1606121882937">
+    <state width="1493" height="244" key="GridCell.Tab.1.bottom/0.0.1536.824/260.-768.1366.728@0.0.1536.824" timestamp="1608518869854" />
+    <state width="1493" height="244" key="GridCell.Tab.1.center" timestamp="1608518869853">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="243" key="GridCell.Tab.1.center/0.0.1536.824/1920.95.1440.860@0.0.1536.824" timestamp="1606121882937" />
-    <state width="1493" height="243" key="GridCell.Tab.1.left" timestamp="1606121882937">
+    <state width="1493" height="244" key="GridCell.Tab.1.center/0.0.1536.824/260.-768.1366.728@0.0.1536.824" timestamp="1608518869853" />
+    <state width="1493" height="244" key="GridCell.Tab.1.left" timestamp="1608518869853">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="243" key="GridCell.Tab.1.left/0.0.1536.824/1920.95.1440.860@0.0.1536.824" timestamp="1606121882937" />
-    <state width="1493" height="243" key="GridCell.Tab.1.right" timestamp="1606121882937">
+    <state width="1493" height="244" key="GridCell.Tab.1.left/0.0.1536.824/260.-768.1366.728@0.0.1536.824" timestamp="1608518869853" />
+    <state width="1493" height="244" key="GridCell.Tab.1.right" timestamp="1608518869853">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="243" key="GridCell.Tab.1.right/0.0.1536.824/1920.95.1440.860@0.0.1536.824" timestamp="1606121882937" />
+    <state width="1493" height="244" key="GridCell.Tab.1.right/0.0.1536.824/260.-768.1366.728@0.0.1536.824" timestamp="1608518869853" />
+    <state width="203" height="477" key="HiddenNamespacesPopup" timestamp="1608519274624">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="203" height="477" key="HiddenNamespacesPopup/0.0.1536.824/260.-768.1366.728@0.0.1536.824" timestamp="1608519274624" />
     <state x="277" y="56" key="SettingsEditor" timestamp="1606112173705">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -264,6 +314,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="842" y="227" width="539" height="781" key="dock-window-3/0.0.1536.824/1920.95.1440.860@0.0.1536.824" timestamp="1606147569925" />
+    <state x="814" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1608515613854">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="814" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/260.-768.1366.728@0.0.1536.824" timestamp="1608515613854" />
   </component>
   <component name="masterDetails">
     <states>

@@ -1,51 +1,51 @@
-DROP TABLE Cliente IF EXISTS;
-DROP TABLE Reserva IF EXISTS;
-DROP TABLE Habitacion IF EXISTS;
-DROP TABLE Hotel IF EXISTS;
+DROP TABLE cliente IF EXISTS;
+DROP TABLE reserva IF EXISTS;
+DROP TABLE habitacion IF EXISTS;
+DROP TABLE hotel IF EXISTS;
 
-CREATE TABLE Cliente (
-    idCliente         INTEGER IDENTITY PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE cliente (
+    idCliente         INTEGER IDENTITY PRIMARY KEY,
     nombre	 		VARCHAR(50),
     rut	 		    VARCHAR(9),
     fechaNacimiento	DATE,
     telefono			VARCHAR(11),
     correoElectronico	VARCHAR(50),
-    contrasena		VARCHAR(20),
+    contrasena		VARCHAR(20)
 );
 
 
-CREATE TABLE Hotel (
-	idHotel             INTEGER IDENTITY PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE hotel (
+	idHotel             INTEGER IDENTITY PRIMARY KEY,
 	nombre              VARCHAR(45),
 	nroHabitaciones     INTEGER,
 	direccion           VARCHAR (45),
 	contactoTelefonico  VARCHAR (11),
 	contactoCorreo      VARCHAR (45),
-	contrasena          VARCHAR (45),
+	contrasena          VARCHAR (45)
 );
 
-CREATE TABLE Habitacion (
-	idHabitacion        INTEGER IDENTITY PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE habitacion (
+	idHabitacion        INTEGER IDENTITY PRIMARY KEY,
 	nroHabitacion       VARCHAR(4),
 	precioHabitacion    INTEGER,
-	pisoHabitacion	    VARCHAR(2),
+	pisoHabitacion	    INTEGER,
 	enUso               INTEGER,
 	idHotel             INTEGER NOT NULL
 );
 
-ALTER TABLE Habitacion ADD CONSTRAINT fk_Habitacion-Hotesl FOREIGN KEY (idHotel) REFERENCES Hotel (idHotel);
+ALTER TABLE habitacion ADD CONSTRAINT fk_Habitacion_Hotel FOREIGN KEY (idHotel) REFERENCES hotel (idHotel);
 
 
-CREATE TABLE Reserva (
-	idReserva		INTEGER IDENTITY PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE reserva (
+	idReserva		INTEGER IDENTITY PRIMARY KEY,
 	fechaInicio 	DATE,
 	montoFinal      INTEGER,
 	fechaTermino 	DATE,
 	idCliente	    INTEGER NOT NULL,
 	idHabitacion    INTEGER NOT NULL
 );
-ALTER TABLE Reserva ADD CONSTRAINT fk_Reserva_Cliente FOREIGN KEY (idCliente) REFERENCES Cliente (idCliente);
-ALTER TABLE Reserva ADD CONSTRAINT fk_Reserva_Habitacion FOREIGN KEY (idHabitacion) REFERENCES Habitacion (idHabitacion);
+ALTER TABLE reserva ADD CONSTRAINT fk_Reserva_Cliente FOREIGN KEY (idCliente) REFERENCES cliente (idCliente);
+ALTER TABLE reserva ADD CONSTRAINT fk_Reserva_Habitacion FOREIGN KEY (idHabitacion) REFERENCES habitacion (idHabitacion);
 
 
 

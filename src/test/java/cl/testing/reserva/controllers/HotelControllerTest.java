@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -133,11 +134,7 @@ public class HotelControllerTest {
 	@Test
 	void siDeseaAgregarUnHotelPeroEsteYaExiste() throws Exception, HotelAlreadyExistsException {
 		Hotel hotelAAgregar = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan@gmail.com", "hotelchillan2020");
-
-		//given(hotelService.getHotelByCorreo(hotelAAgregar.getContactoCorreo())).willThrow(new HotelAlreadyExistsException());
-		//given(hotelService.getHotelByCorreo(hotelAAgregar.getContactoCorreo())).willReturn(hotelAAgregar);
-		//when(hotelService.getHotelByCorreo(hotelAAgregar.getContactoCorreo())).thenReturn(hotelAAgregar);
-		//doThrow(new HotelAlreadyExistsException()).when(hotelService).agregarHotel(hotelAAgregar);
+		doThrow(new HotelAlreadyExistsException()).when(hotelService).agregarHotel(ArgumentMatchers.any(Hotel.class));
 
 		MockHttpServletResponse response = mockMvc.perform(post("/reservaHoteles/hoteles/agregar")
 				.contentType(MediaType.APPLICATION_JSON).content(jsonHotel.write(hotelAAgregar).getJson())).andReturn().getResponse();
@@ -190,11 +187,11 @@ public class HotelControllerTest {
 	@Test
 	void siDeseaEditarLosDatosDeUnHotelYNoLoEncuentraArrojaExcepcion() throws Exception, HotelNotFoundException, HotelAlreadyExistsException {
 		Hotel hotelBuscado = new Hotel("Hotel Chillan", 50, "Avenida Libertdad 658", "+56945768572", "hotelchillan@gmail.com", "hotelchillan2020");
-		//String nombre = "Hotel Chillancito";
+		String nombre = "Hotel Chillancito";
 		hotelBuscado.setIdHotel(1);
-		//hotelBuscado.setNombre(nombre);
+		hotelBuscado.setNombre(nombre);
 
-		doThrow(new HotelNotFoundException()).when(hotelService).editarHotel(hotelBuscado);
+		given(hotelService.editarHotel(ArgumentMatchers.any(Hotel.class))).willThrow(new HotelNotFoundException());
 
 		MockHttpServletResponse response = mockMvc.perform(post("/reservaHoteles/hoteles/update/1")
 				.contentType(MediaType.APPLICATION_JSON).content(jsonHotel.write(hotelBuscado).getJson()))
@@ -203,6 +200,5 @@ public class HotelControllerTest {
 
 
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
-		verify(hotelService, times(1)).editarHotel(hotelBuscado);
 	}
 }

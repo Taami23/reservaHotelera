@@ -1,5 +1,6 @@
 package cl.testing.reserva.controllers;
 
+import java.sql.SQLOutput;
 import java.util.List;
 
 import cl.testing.reserva.model.Cliente;
@@ -35,6 +36,7 @@ public class ClienteController {
         try {
             cliente.setIdCliente(id);
             clienteService.updateCliente(cliente);
+            System.out.println(cliente.toString());
             return new ResponseEntity<>(clienteService.updateCliente(cliente),HttpStatus.CREATED);
         }catch (ClienteNotFoundException e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -45,9 +47,9 @@ public class ClienteController {
     public ResponseEntity<Cliente> agregarHotel(@RequestBody Cliente cliente) throws ClienteNotFoundException, ClienteAlreadyExistsException {
         try {
             clienteService.agregarCliente(cliente);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>( HttpStatus.CREATED);
         } catch (ClienteAlreadyExistsException e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
         }
     }
 

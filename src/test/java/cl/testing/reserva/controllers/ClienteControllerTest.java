@@ -18,6 +18,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -113,7 +114,7 @@ public class ClienteControllerTest {
         String nombre = "Tamara Valentina Salgado Villalobos";
         cliente.setIdCliente(1);
         cliente.setNombre(nombre);
-        given(clienteService.updateCliente(cliente)).willThrow(new ClienteNotFoundException());
+        given(clienteService.updateCliente(ArgumentMatchers.any(Cliente.class))).willThrow(new ClienteNotFoundException());
 
         //When
         MockHttpServletResponse response = mockMvc.perform(post("/ReservaHotelera/clientes/update/1")
@@ -139,10 +140,9 @@ public class ClienteControllerTest {
     //ARREGLARLO
 
     @Test
-    void siDeseaAgregarUnHotelPeroEsteYaExiste() throws Exception, ClienteAlreadyExistsException {
+    void siDeseaAgregarUnClientePeroEsteYaExiste() throws Exception, ClienteAlreadyExistsException {
         Cliente cliente = new Cliente("Tamara Salgado", "19415903k", new Date("1997/01/19"), "+56975845747", "tvale.sv@gmail.com","holi");
-//        when(clienteService.getClienteByCorreo(cliente.getCorreoElectrinico())).thenReturn(null);
-        doThrow(new ClienteNotFoundException()).when(clienteService).agregarCliente(cliente);
+        doThrow(new ClienteAlreadyExistsException()).when(clienteService).agregarCliente(ArgumentMatchers.any(Cliente.class));
 
         MockHttpServletResponse response = mockMvc.perform(post("/ReservaHotelera/clientes/add")
                 .contentType(MediaType.APPLICATION_JSON).content(jsonCliente.write(cliente).getJson()).accept(MediaType.APPLICATION_JSON))
