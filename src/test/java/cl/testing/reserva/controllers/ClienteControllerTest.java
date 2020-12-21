@@ -39,7 +39,7 @@ public class ClienteControllerTest {
 
     @Mock
     private ClienteService clienteService;
-
+    @Mock
     private JacksonTester<List<Cliente>> jsonListaCliente;
     private JacksonTester<Cliente> jsonCliente;
 
