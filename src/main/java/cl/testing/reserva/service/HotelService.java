@@ -31,10 +31,10 @@ public class HotelService {
     }
     
     public Hotel buscarHotel(int id) throws HotelNotFoundException {
-		Hotel hotelEncontrado = hotelRepository.getOne(id);	
+		Hotel hotelEncontrado = hotelRepository.getOne(id);
 		if(hotelEncontrado == null) {
 			throw new HotelNotFoundException();
-		}		
+		}
 		return hotelEncontrado;
 	}	
 	public void eliminarHotel(int id) throws HotelNotFoundException {

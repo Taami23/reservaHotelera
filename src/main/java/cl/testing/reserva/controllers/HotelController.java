@@ -48,11 +48,12 @@ public class HotelController {
   	@PostMapping("/update/{id}")
   	public ResponseEntity<Hotel> update(@PathVariable int id, Hotel hotel){
   		try {
-  			hotel.setIdHotel(id);
-  			hotelService.editarHotel(hotel);
+  			//hotel.setIdHotel(id);
+  			//hotelService.editarHotel(hotel);
+  			return new ResponseEntity<Hotel>(hotelService.editarHotel(hotel), HttpStatus.CREATED);
   		}catch (HotelNotFoundException e) {
  			 return new ResponseEntity<Hotel>(HttpStatus.NOT_FOUND);
  		}
- 		 return new ResponseEntity<Hotel>(HttpStatus.OK);
+ 	//	 return new ResponseEntity<Hotel>(HttpStatus.OK);
   	}
 }
