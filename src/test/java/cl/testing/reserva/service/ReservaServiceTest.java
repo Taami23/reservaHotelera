@@ -1,13 +1,18 @@
 package cl.testing.reserva.service;
 
-
 import cl.testing.reserva.model.Cliente;
+import cl.testing.reserva.model.Habitacion;
 import cl.testing.reserva.model.Reserva;
 import cl.testing.reserva.repository.ClienteRepository;
+import cl.testing.reserva.repository.HabitacionRepository;
 import cl.testing.reserva.repository.ReservaRepository;
+import exceptions.ClienteAlreadyExistsException;
+import exceptions.ClienteNotFoundException;
 import exceptions.ReservaAlreadyExistsException;
 import exceptions.ReservaNotFoundException;
 import exceptions.ReservaEmptyListException;
+import exceptions.ReservaNotFoundClienteOHabitacion;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,92 +29,100 @@ import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 public class ReservaServiceTest {
-    
-    @Mock
-    private ReservaRepository reservaRepository;
 
-    @InjectMocks
-    private ReservaService reservaService;
+	@Mock
+	private ReservaRepository reservaRepository;
 
+	@Mock
+	private ClienteRepository clienteRepository;
 
-    @Test 
-    void siSeinvocaGetAllReservasDebeRetornarTodasLasReservas() throws ReservaEmptyListException {
-    	//Arrange
-    	ArrayList<Reserva> reservas = new ArrayList<Reserva>();
-    	List<Reserva> resultado;
-        reservas.add(new Reserva(new Date("2020/11/09"), 297000, new Date("2020/11/20"), 1, 1));
-        reservas.add(new Reserva(new Date("2020/11/05"), 270000, new Date("2020/11/15"), 2, 2));
-        when(reservaRepository.findAll()).thenReturn(reservas);
-        
-        //act
-        resultado = reservaService.getAllReservas();
-        
-        //Assert
-        assertNotNull(resultado);
-        assertAll("resultado",
-        		//reserva1
-        		()-> assertEquals(new Date("2020/11/09"), resultado.get(0).getFechaInicio()),
-        		()-> assertEquals(297000, resultado.get(0).getMontoFinal()),
-        		()-> assertEquals(new Date("2020/11/20"), resultado.get(0).getFechaTermino()),
-				()-> assertEquals(1, resultado.get(0).getIdCliente()),
-				()-> assertEquals(1, resultado.get(0).getIdHabitacion()),
-				//reserva2
-				()-> assertEquals(new Date("2020/11/05"), resultado.get(1).getFechaInicio()),
-        		()-> assertEquals(270000, resultado.get(1).getMontoFinal()),
-        		()-> assertEquals(new Date("2020/11/15"), resultado.get(1).getFechaTermino()),
-				()-> assertEquals(2, resultado.get(1).getIdCliente()),
-				()-> assertEquals(2, resultado.get(1).getIdHabitacion())
-        );
-    }
-    
-    @Test
-    void siDeseaAgregarUnaReservaEntoncesLaPuedeAgregar() throws ReservaAlreadyExistsException, ReservaNotFoundException {
-        //Arrange
-        List<Reserva> reservas = new ArrayList<>();
-        Reserva reserva = new Reserva(new Date("2020/11/09"), 297000, new Date("2020/11/20"), 1, 1);
-        //Reserva reservaExistente = new Reserva(new Date("2020/11/09"), 297000, new Date("2020/11/20"), 1, 1);
-        //reservas.add(reservaExistente);
-        when(reservaRepository.findAll()).thenReturn(reservas);
+	@Mock
+	private HabitacionRepository habitacionRepository;
 
-        reservaService.agregarReserva(reserva);
-        verify(reservaRepository, times(1)).save(reserva);
-    }
-    
-    @Test
-    void siDeseaAgregarUnaReservaYExisteEntoncesLanzaExcepcionReservaAlreadyExists() throws ReservaNotFoundException {
-        //Arrange
-        List<Reserva> reservas = new ArrayList<>();
-        Reserva reserva = new Reserva(new Date("2020/11/09"), 297000, new Date("2020/11/20"), 1, 1);
-        when(reservaService.buscarReserva(reserva.getIdReserva())).thenReturn(null);
-        Reserva reservaExistente = new Reserva(new Date("2020/11/09"), 297000, new Date("2020/11/20"), 1, 1);
-        reservas.add(reservaExistente);
-        when(reservaRepository.findAll()).thenReturn(reservas);
+	@InjectMocks
+	private ReservaService reservaService;
+	private ClienteService clienteService;
 
-        //Act + Assert
-        assertThrows(ReservaAlreadyExistsException.class, ()-> reservaService.agregarReserva(reserva));
-    }
+	@Test
+	void siSeinvocaGetAllReservasDebeRetornarTodasLasReservas() throws ReservaEmptyListException {
+		// Arrange
+		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+		List<Reserva> resultado;
+		reservas.add(new Reserva(new Date("2020/11/09"), 297000, new Date("2020/11/20"), 1, 1));
+		reservas.add(new Reserva(new Date("2020/11/05"), 270000, new Date("2020/11/15"), 2, 2));
+		when(reservaRepository.findAll()).thenReturn(reservas);
 
-    @Test
-    void siDeseaEliminarUnaReservaSeBuscaYSeElimina() throws ReservaNotFoundException {
-        // Arrange
-        Reserva reserva = new Reserva(new Date("2020/11/09"), 297000, new Date("2020/11/20"), 1, 1);
-        reserva.setIdReserva(1);
-        when(reservaRepository.getOne(1)).thenReturn(reserva);
+		// act
+		resultado = reservaService.getAllReservas();
 
-        // Act
-        reservaService.eliminarReserva(reserva.getIdReserva());
+		// Assert
+		assertNotNull(resultado);
+		assertAll("resultado",
+				// reserva1
+				() -> assertEquals(new Date("2020/11/09"), resultado.get(0).getFechaInicio()),
+				() -> assertEquals(297000, resultado.get(0).getMontoFinal()),
+				() -> assertEquals(new Date("2020/11/20"), resultado.get(0).getFechaTermino()),
+				() -> assertEquals(1, resultado.get(0).getIdCliente()),
+				() -> assertEquals(1, resultado.get(0).getIdHabitacion()),
+				// reserva2
+				() -> assertEquals(new Date("2020/11/05"), resultado.get(1).getFechaInicio()),
+				() -> assertEquals(270000, resultado.get(1).getMontoFinal()),
+				() -> assertEquals(new Date("2020/11/15"), resultado.get(1).getFechaTermino()),
+				() -> assertEquals(2, resultado.get(1).getIdCliente()),
+				() -> assertEquals(2, resultado.get(1).getIdHabitacion()));
+	}
 
-        //Assert
-        verify(reservaRepository,times(1)).delete(reserva);
-    }
-    @Test
-    void siDeseaEliminarUnClienteSeBuscaYNoExiste() throws  ReservaNotFoundException {
-        // Arrange
-        Reserva reserva = new Reserva(new Date("2020/11/09"), 297000, new Date("2020/11/20"), 1, 1);
-        reserva.setIdReserva(1);
-        when(reservaRepository.getOne(1)).thenReturn(null);
+	@Test
+	void siDeseaAgregarUnaReservaEntoncesLaPuedeAgregar() throws ReservaNotFoundClienteOHabitacion {
+		// Arrange
+		Cliente cliente = new Cliente("Tamara Salgado", "19415903k", new Date("1997/01/19"), "+56975845747", "tvale.sv@gmail.com", "holi");
+		Habitacion habitacion = new Habitacion("4", 20000, 2, 0);
+		Reserva reserva = new Reserva(new Date("2020/11/09"), 297000, new Date("2020/11/21"), 1, 1);
+		when(clienteRepository.getOne(1)).thenReturn(cliente);
+		when(habitacionRepository.getOne(1)).thenReturn(habitacion);
 
-        //Act + Assert
-        assertThrows(ReservaNotFoundException.class,() -> reservaService.eliminarReserva(1) );
-    }
+		// Act
+		reservaService.agregarReserva(reserva);
+
+		// Assert
+		verify(reservaRepository, times(1)).save(reserva);
+	}
+
+	@Test
+	void siDeseaAgregarUnaReservaYNoExisteElClienteOLaHabitacionEntoncesLanzaExcepcionReservaNotFoundClienteOHabitacion() throws ReservaNotFoundClienteOHabitacion {
+		Cliente cliente = new Cliente("Tamara Salgado", "19415903k", new Date("1997/01/19"), "+56975845747", "tvale.sv@gmail.com", "holi");
+		Habitacion habitacion = new Habitacion("4", 20000, 2, 0);
+		Reserva reserva = new Reserva(new Date("2020/11/09"), 297000, new Date("2020/11/21"), 1, 1);
+		when(clienteRepository.getOne(1)).thenReturn(cliente);
+		when(habitacionRepository.getOne(1)).thenReturn(null);
+
+		
+		//Act + Assert
+		assertThrows(ReservaNotFoundClienteOHabitacion.class, () -> reservaService.agregarReserva(reserva));
+	}
+
+	@Test
+	void siDeseaEliminarUnaReservaSeBuscaYSeElimina() throws ReservaNotFoundException {
+		// Arrange
+		Reserva reserva = new Reserva(new Date("2020/11/09"), 297000, new Date("2020/11/20"), 1, 1);
+		reserva.setIdReserva(1);
+		when(reservaRepository.getOne(1)).thenReturn(reserva);
+
+		// Act
+		reservaService.eliminarReserva(reserva.getIdReserva());
+
+		// Assert
+		verify(reservaRepository, times(1)).delete(reserva);
+	}
+
+	@Test
+	void siDeseaEliminarUnClienteSeBuscaYNoExiste() throws ReservaNotFoundException {
+		// Arrange
+		Reserva reserva = new Reserva(new Date("2020/11/09"), 297000, new Date("2020/11/20"), 1, 1);
+		reserva.setIdReserva(1);
+		when(reservaRepository.getOne(1)).thenReturn(null);
+
+		// Act + Assert
+		assertThrows(ReservaNotFoundException.class, () -> reservaService.eliminarReserva(1));
+	}
 }

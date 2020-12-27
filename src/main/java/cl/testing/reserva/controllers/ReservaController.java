@@ -6,6 +6,7 @@ import cl.testing.reserva.model.Reserva;
 import cl.testing.reserva.service.ReservaService;
 import exceptions.ReservaAlreadyExistsException;
 import exceptions.ReservaEmptyListException;
+import exceptions.ReservaNotFoundClienteOHabitacion;
 import exceptions.ReservaNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +36,11 @@ public class ReservaController {
     }
 	
 	@PostMapping("/agregar")
-	public ResponseEntity<Reserva> agregarReserva(@RequestBody Reserva reserva) throws
-	ReservaNotFoundException{
+	public ResponseEntity<Reserva> agregarReserva(@RequestBody Reserva reserva) throws ReservaNotFoundClienteOHabitacion{
 		try {
 			reservaService.agregarReserva(reserva);
 			return new ResponseEntity<>(reserva, HttpStatus.CREATED);
-		}catch (ReservaAlreadyExistsException e) {
+		}catch (ReservaNotFoundClienteOHabitacion e) {
 			return new ResponseEntity<>(null, HttpStatus.CONFLICT);
 		}
 	}
