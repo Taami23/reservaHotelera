@@ -67,9 +67,8 @@ public class ReservaServiceTest {
         //Arrange
         List<Reserva> reservas = new ArrayList<>();
         Reserva reserva = new Reserva(new Date("2020/11/09"), 297000, new Date("2020/11/20"), 1, 1);
-        Reserva reservaExistente = new Reserva(new Date("2020/11/09"), 297000, new Date("2020/11/20"), 1, 1);
-        reservaExistente.setIdReserva(1);
-        reservas.add(reservaExistente);
+        //Reserva reservaExistente = new Reserva(new Date("2020/11/09"), 297000, new Date("2020/11/20"), 1, 1);
+        //reservas.add(reservaExistente);
         when(reservaRepository.findAll()).thenReturn(reservas);
 
         reservaService.agregarReserva(reserva);

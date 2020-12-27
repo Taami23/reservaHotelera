@@ -3,6 +3,7 @@ package cl.testing.reserva.service;
 
 import java.util.List;
 import cl.testing.reserva.model.Reserva;
+import cl.testing.reserva.repository.ClienteRepository;
 import cl.testing.reserva.repository.ReservaRepository;
 import exceptions.ReservaAlreadyExistsException;
 import exceptions.ReservaEmptyListException;
@@ -15,7 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ReservaService {
 	
 	@Autowired
-	private ReservaRepository reservaRepository;	
+	private ReservaRepository reservaRepository;
+	private ClienteRepository clienteRepository;
 	
 	public List<Reserva> getAllReservas() throws ReservaEmptyListException{		
 		if(reservaRepository.findAll().isEmpty()) {
@@ -25,10 +27,13 @@ public class ReservaService {
 	}	
 
 	public void agregarReserva(Reserva reserva) throws ReservaNotFoundException, ReservaAlreadyExistsException {
-		if(buscarReserva(reserva.getIdReserva()) == null) {
+		if(clienteRepository.getOne(reserva.getIdCliente()) != null) {
 			reservaRepository.save(reserva);
 		}
-		throw new ReservaAlreadyExistsException();		
+		//if (buscarReserva(reserva.getIdReserva()) == null) {
+		///	reservaRepository.save(reserva);
+		//}
+		throw new ReservaAlreadyExistsException();
 	}
 
 	public void eliminarReserva(int id) throws ReservaNotFoundException {
