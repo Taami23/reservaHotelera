@@ -27,14 +27,6 @@ public class ClienteServiceTest {
     @InjectMocks
     private ClienteService clienteService;
 
-
-    //    private String nombre;
-    //    private String rut;
-    //    private Date fechaNacimiento;
-    //    private String telefono;
-    //    private String correoElectrinico;
-    //    private String contrasena;
-
     @Test
     void siSeInvocaGetAllClientesDebeRetornarTodosLosClientes() throws ClientesEmptyListException {
         //Arrange

@@ -15,7 +15,6 @@ import exceptions.ClienteAlreadyExistsException;
 import exceptions.ClienteNotFoundException;
 import exceptions.ClientesEmptyListException;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;

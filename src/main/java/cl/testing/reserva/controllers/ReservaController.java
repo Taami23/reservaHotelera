@@ -1,13 +1,8 @@
 package cl.testing.reserva.controllers;
 
-import java.util.List;
-
 import cl.testing.reserva.model.Reserva;
 import cl.testing.reserva.service.ReservaService;
-import exceptions.ReservaAlreadyExistsException;
-import exceptions.ReservaEmptyListException;
-import exceptions.ReservaNotFoundClienteOHabitacion;
-import exceptions.ReservaNotFoundException;
+import exceptions.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,18 +24,12 @@ public class ReservaController {
 	@Autowired
     private ReservaService reservaService;
 	
-	@GetMapping("/")
-    public ResponseEntity<List<Reserva>> getAllReservas() throws ReservaEmptyListException {
-        List<Reserva> reservas = reservaService.getAllReservas();
-        return new ResponseEntity<List<Reserva>>(reservas,HttpStatus.OK);
-    }
-	
 	@PostMapping("/agregar")
 	public ResponseEntity<Reserva> agregarReserva(@RequestBody Reserva reserva) throws ReservaNotFoundClienteOHabitacion{
 		try {
 			reservaService.agregarReserva(reserva);
 			return new ResponseEntity<>(reserva, HttpStatus.CREATED);
-		}catch (ReservaNotFoundClienteOHabitacion e) {
+		}catch (ReservaNotFoundClienteOHabitacion | HabitacionAlreadyInUse e) {
 			return new ResponseEntity<>(null, HttpStatus.CONFLICT);
 		}
 	}
@@ -52,7 +41,7 @@ public class ReservaController {
         } catch (ReservaNotFoundException e) {
             return new ResponseEntity<Reserva>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Reserva>(reservaService.buscarReserva(id), HttpStatus.OK);
+        return new ResponseEntity<Reserva>(HttpStatus.OK);
     }	
 	
 }

@@ -8,33 +8,27 @@ import cl.testing.reserva.model.Reserva;
 import cl.testing.reserva.repository.ClienteRepository;
 import cl.testing.reserva.repository.HabitacionRepository;
 import cl.testing.reserva.repository.ReservaRepository;
-import exceptions.ClientesEmptyListException;
-import exceptions.ReservaAlreadyExistsException;
-import exceptions.ReservaEmptyListException;
-import exceptions.ReservaNotFoundClienteOHabitacion;
-import exceptions.ReservaNotFoundException;
+import exceptions.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
-
+@Service
 public class ReservaService {
 	
 	@Autowired
 	private ReservaRepository reservaRepository;
 	private ClienteRepository clienteRepository;
 	private HabitacionRepository habitacionRepository;
-	
-	public List<Reserva> getAllReservas() throws ReservaEmptyListException{		
-		if(reservaRepository.findAll().isEmpty()) {
-            throw new ReservaEmptyListException();
-        }
-        return reservaRepository.findAll();
-	}	
 
-	public void agregarReserva(Reserva reserva) throws ReservaNotFoundClienteOHabitacion {
+	public void agregarReserva(Reserva reserva) throws ReservaNotFoundClienteOHabitacion, HabitacionAlreadyInUse {
 		if((clienteRepository.getOne(reserva.getIdCliente()) != null) && (habitacionRepository.getOne(reserva.getIdHabitacion()) != null)) {
-			reservaRepository.save(reserva);
+			if(habitacionRepository.getOne(reserva.getIdHabitacion()).isEnUso() == 0){
+				reservaRepository.save(reserva);
+			}else {
+				throw new HabitacionAlreadyInUse();
+			}
 		}else {
 			throw new ReservaNotFoundClienteOHabitacion();
 		}
@@ -42,20 +36,11 @@ public class ReservaService {
 	}
 
 	public void eliminarReserva(int id) throws ReservaNotFoundException {
-		Reserva reservaAEliminar = buscarReserva(id);
+		Reserva reservaAEliminar = reservaRepository.getOne(id);
 		if(reservaAEliminar == null) {
 			throw new ReservaNotFoundException();
 		}
 		reservaRepository.delete(reservaAEliminar);
 	}
-
-	public Reserva buscarReserva(int id) throws ReservaNotFoundException {
-		Reserva reservaEncontrada = reservaRepository.getOne(id);
-		if(reservaEncontrada == null) {
-			throw new ReservaNotFoundException();
-		}
-		return reservaEncontrada;
-	}
-	
 
 }

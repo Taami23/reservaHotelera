@@ -3,6 +3,7 @@ package cl.testing.reserva.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class Habitacion {
@@ -57,6 +58,23 @@ public class Habitacion {
 	}
 	public void setEnUso(Integer enUso) {
 		this.enUso = enUso;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Habitacion that = (Habitacion) o;
+		return Objects.equals(idHabitacion, that.idHabitacion) &&
+				Objects.equals(numeroHabitacion, that.numeroHabitacion) &&
+				Objects.equals(precioHabitacion, that.precioHabitacion) &&
+				Objects.equals(pisoHabitacion, that.pisoHabitacion) &&
+				Objects.equals(enUso, that.enUso);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idHabitacion, numeroHabitacion, precioHabitacion, pisoHabitacion, enUso);
 	}
 
 	@Override

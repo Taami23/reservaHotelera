@@ -5,7 +5,6 @@ import cl.testing.reserva.repository.HotelRepository;
 import exceptions.HotelAlreadyExistsException;
 import exceptions.HotelNotFoundException;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -88,7 +87,6 @@ public class HotelServiceTest {
 
 	@Test
 	void siSeInvocaGetAllHotelYNoExistenHotelesArrojaExcepcion() throws HotelNotFoundException{
-		//when(hotelRepository.findAll()).thenReturn(null);git s
     	assertThrows(HotelNotFoundException.class, () -> hotelService.getAllHotel());
 
 	}
@@ -119,7 +117,6 @@ public class HotelServiceTest {
 		hotels.add(hotelExistente);
 		hotels.add(hotelExistente1);
 		when(hotelRepository.findAll()).thenReturn(hotels);
-		//doReturn(hotelExistente).when(hotelService).getHotelByCorreo(hotelAAgregar.getContactoCorreo());
 
 
 
@@ -136,20 +133,6 @@ public class HotelServiceTest {
 		
 		//Assert
 		verify(hotelRepository,times(1)).delete(hotelBuscado);
-		
-		
-		
-		/*
-		assertNotNull(hotelEncontrado);
-		assertAll("hotelEncontrado",
-				() -> assertEquals(1, hotelEncontrado.getIdHotel()),
-				() -> assertEquals("Hotel Chillan".toLowerCase(), hotelEncontrado.getNombre().toLowerCase()),
-				() -> assertEquals(50, hotelEncontrado.getNumeroHabitaiciones()),
-				() -> assertEquals("Avenida Libertad 658".toLowerCase(), hotelEncontrado.getDireccion()),
-				() -> assertEquals("+56945768572", hotelEncontrado.getContactoTelefono()),
-				() -> assertEquals("hotelchillan@gmail.com", hotelEncontrado.getContactoCorreo()),
-				() -> assertEquals("hotelchillan2020", hotelEncontrado.getContrasena()));
-				*/
 	}
     @Test
 	void siDeseaEliminarUnHotelYNoLoEncuentraEntoncesSeArrojaLaExcepcion() throws HotelNotFoundException {

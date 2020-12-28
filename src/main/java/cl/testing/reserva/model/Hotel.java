@@ -87,6 +87,66 @@ public class Hotel {
 		this.contrasena = contrasena;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((contactoCorreo == null) ? 0 : contactoCorreo.hashCode());
+		result = prime * result + ((contactoTelefono == null) ? 0 : contactoTelefono.hashCode());
+		result = prime * result + ((contrasena == null) ? 0 : contrasena.hashCode());
+		result = prime * result + ((direccion == null) ? 0 : direccion.hashCode());
+		result = prime * result + ((idHotel == null) ? 0 : idHotel.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((numeroHabitaiciones == null) ? 0 : numeroHabitaiciones.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Hotel other = (Hotel) obj;
+		if (contactoCorreo == null) {
+			if (other.contactoCorreo != null)
+				return false;
+		} else if (!contactoCorreo.equals(other.contactoCorreo))
+			return false;
+		if (contactoTelefono == null) {
+			if (other.contactoTelefono != null)
+				return false;
+		} else if (!contactoTelefono.equals(other.contactoTelefono))
+			return false;
+		if (contrasena == null) {
+			if (other.contrasena != null)
+				return false;
+		} else if (!contrasena.equals(other.contrasena))
+			return false;
+		if (direccion == null) {
+			if (other.direccion != null)
+				return false;
+		} else if (!direccion.equals(other.direccion))
+			return false;
+		if (idHotel == null) {
+			if (other.idHotel != null)
+				return false;
+		} else if (!idHotel.equals(other.idHotel))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (numeroHabitaiciones == null) {
+			if (other.numeroHabitaiciones != null)
+				return false;
+		} else if (!numeroHabitaiciones.equals(other.numeroHabitaiciones))
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {

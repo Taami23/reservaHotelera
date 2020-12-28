@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 public class Reserva {
@@ -76,6 +77,25 @@ public class Reserva {
 
 	public void setIdHabitacion(Integer idHabitacion) {
 		this.idHabitacion = idHabitacion;
+	}
+
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Reserva reserva = (Reserva) o;
+		return Objects.equals(idReserva, reserva.idReserva) &&
+				Objects.equals(fechaInicio, reserva.fechaInicio) &&
+				Objects.equals(montoFinal, reserva.montoFinal) &&
+				Objects.equals(fechaTermino, reserva.fechaTermino) &&
+				Objects.equals(idCliente, reserva.idCliente) &&
+				Objects.equals(idHabitacion, reserva.idHabitacion);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idReserva, fechaInicio, montoFinal, fechaTermino, idCliente, idHabitacion);
 	}
 
 	@Override

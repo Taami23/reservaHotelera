@@ -9,7 +9,9 @@ import cl.testing.reserva.model.Habitacion;
 import cl.testing.reserva.repository.HabitacionRepository;
 import exceptions.HabitacionAlreadyExistException;
 import exceptions.HabitacionNotFoundException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class HabitacionService {
 
 	@Autowired
@@ -21,36 +23,6 @@ public class HabitacionService {
 		}
 		return habitacionRepository.findAll();
 	}
-
-//	public List<Habitacion> getAllHabitacionesByStatus(boolean b) throws HabitacionNotFoundException {
-//		if (habitacionRepository.findAll().isEmpty()) {
-//			throw new HabitacionNotFoundException();
-//		}else {
-//			ArrayList<Habitacion> habitaciones1= new ArrayList<Habitacion>();
-//			List<Habitacion> habitaciones=(List<Habitacion>) habitacionRepository.findAll();
-//			for(Habitacion habitacion: habitaciones) {
-//				if(habitacion.isEnUso()==1) {
-//					habitaciones1.add(habitacion);
-//				}
-//			}
-//			if(habitaciones1.isEmpty()) {
-//				throw new HabitacionNotFoundException();
-//			}
-//		return habitaciones1;
-//		}
-//	}
-//
-	
-	//FALTAAAAAAA
-//	public List<Habitacion> getAllHabitacionesByNombreHotel(String nombreHotel) {
-//		ArrayList<Habitacion> habitacionesConNombreHotel = new ArrayList<Habitacion>();
-//		List<Habitacion> habitaciones = (List<Habitacion>) habitacionRepository.findAll();
-//
-//		for(Habitacion habitacion : habitaciones) {
-//			habitacionesConNombreHotel.add(habitacion);
-//		}
-//		return habitacionesConNombreHotel;
-//	}
 
 
 	public void agregarHabitacion(Habitacion habitacion) throws HabitacionAlreadyExistException, HabitacionNotFoundException {
@@ -99,5 +71,37 @@ public class HabitacionService {
 		}
 		return habitacionRepository.save(habitacion);
 	}
+
+
+//	public List<Habitacion> getAllHabitacionesByStatus(boolean b) throws HabitacionNotFoundException {
+//		if (habitacionRepository.findAll().isEmpty()) {
+//			throw new HabitacionNotFoundException();
+//		}else {
+//			ArrayList<Habitacion> habitaciones1= new ArrayList<Habitacion>();
+//			List<Habitacion> habitaciones=(List<Habitacion>) habitacionRepository.findAll();
+//			for(Habitacion habitacion: habitaciones) {
+//				if(habitacion.isEnUso()==1) {
+//					habitaciones1.add(habitacion);
+//				}
+//			}
+//			if(habitaciones1.isEmpty()) {
+//				throw new HabitacionNotFoundException();
+//			}
+//		return habitaciones1;
+//		}
+//	}
+//
+
+	//FALTAAAAAAA
+//	public List<Habitacion> getAllHabitacionesByNombreHotel(String nombreHotel) {
+//		ArrayList<Habitacion> habitacionesConNombreHotel = new ArrayList<Habitacion>();
+//		List<Habitacion> habitaciones = (List<Habitacion>) habitacionRepository.findAll();
+//
+//		for(Habitacion habitacion : habitaciones) {
+//			habitacionesConNombreHotel.add(habitacion);
+//		}
+//		return habitacionesConNombreHotel;
+//	}
+
 
 }

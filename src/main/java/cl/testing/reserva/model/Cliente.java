@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 public class Cliente {
@@ -87,6 +88,25 @@ public class Cliente {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(idCliente, cliente.idCliente) &&
+                Objects.equals(nombre, cliente.nombre) &&
+                Objects.equals(rut, cliente.rut) &&
+                Objects.equals(fechaNacimiento, cliente.fechaNacimiento) &&
+                Objects.equals(telefono, cliente.telefono) &&
+                Objects.equals(correoElectrinico, cliente.correoElectrinico) &&
+                Objects.equals(contrasena, cliente.contrasena);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idCliente, nombre, rut, fechaNacimiento, telefono, correoElectrinico, contrasena);
+    }
+
+    @Override
     public String toString() {
         return "Cliente{" +
                 "idCliente=" + idCliente +
@@ -98,4 +118,6 @@ public class Cliente {
                 ", contrasena='" + contrasena + '\'' +
                 '}';
     }
+
+
 }
