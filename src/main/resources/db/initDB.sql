@@ -1,9 +1,9 @@
-DROP TABLE cliente IF EXISTS;
-DROP TABLE reserva IF EXISTS;
-DROP TABLE HABITACION IF EXISTS;
-DROP TABLE hotel IF EXISTS;
+DROP TABLE Cliente IF EXISTS;
+DROP TABLE Reserva IF EXISTS;
+DROP TABLE Habitacion IF EXISTS;
+DROP TABLE Hotel IF EXISTS;
 
-CREATE TABLE cliente (
+CREATE TABLE Cliente (
     idCliente         INTEGER IDENTITY PRIMARY KEY,
     nombre	 		VARCHAR(50),
     rut	 		    VARCHAR(9),
@@ -14,7 +14,7 @@ CREATE TABLE cliente (
 );
 
 
-CREATE TABLE hotel (
+CREATE TABLE Hotel (
 	idHotel             INTEGER IDENTITY PRIMARY KEY,
 	nombre              VARCHAR(45),
 	nroHabitaciones     INTEGER,
@@ -24,7 +24,7 @@ CREATE TABLE hotel (
 	contrasena          VARCHAR (45)
 );
 
-CREATE TABLE HABITACION (
+CREATE TABLE Habitacion (
 	idHabitacion        INTEGER IDENTITY PRIMARY KEY,
 	nroHabitacion       VARCHAR(4),
 	precioHabitacion    INTEGER,
@@ -33,10 +33,10 @@ CREATE TABLE HABITACION (
 	idHotel             INTEGER NOT NULL
 );
 
-ALTER TABLE HABITACION ADD CONSTRAINT fk_Habitacion_Hotel FOREIGN KEY (idHotel) REFERENCES hotel (idHotel);
+ALTER TABLE Habitacion ADD CONSTRAINT fk_Habitacion_Hotel FOREIGN KEY (idHotel) REFERENCES Hotel (idHotel);
 
 
-CREATE TABLE reserva (
+CREATE TABLE Reserva (
 	idReserva		INTEGER IDENTITY PRIMARY KEY,
 	fechaInicio 	DATE,
 	montoFinal      INTEGER,
@@ -44,8 +44,8 @@ CREATE TABLE reserva (
 	idCliente	    INTEGER NOT NULL,
 	idHabitacion    INTEGER NOT NULL
 );
-ALTER TABLE reserva ADD CONSTRAINT fk_Reserva_Cliente FOREIGN KEY (idCliente) REFERENCES cliente (idCliente);
-ALTER TABLE reserva ADD CONSTRAINT fk_Reserva_Habitacion FOREIGN KEY (idHabitacion) REFERENCES HABITACION (idHabitacion);
+ALTER TABLE Reserva ADD CONSTRAINT fk_Reserva_Cliente FOREIGN KEY (idCliente) REFERENCES Cliente (idCliente);
+ALTER TABLE Reserva ADD CONSTRAINT fk_Reserva_Habitacion FOREIGN KEY (idHabitacion) REFERENCES Habitacion (idHabitacion);
 
 
 

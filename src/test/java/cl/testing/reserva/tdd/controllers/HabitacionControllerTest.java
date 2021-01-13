@@ -176,7 +176,7 @@ public class HabitacionControllerTest {
 	}
 	
 	@Test
-	void siDeseaEkiminarUnaHabitacionYNoLaEncuentraArrojaException() throws Exception{
+	void siDeseaEliminarUnaHabitacionYNoLaEncuentraArrojaException() throws Exception{
 		doThrow(new HabitacionNotFoundException()).when(habitacionService).eliminarHabitacion(1);
 		
 		MockHttpServletResponse response = mockMvc.perform(get("/ReservaHotelera/habitaciones/delete/1")

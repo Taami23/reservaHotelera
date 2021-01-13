@@ -20,7 +20,6 @@ public class Habitacion {
 	}
 	
 	public Habitacion(String numeroHabitacion, Integer precioHabitacion, Integer pisoHabitacion, Integer enUso) {
-		this.idHabitacion=idHabitacion;
 		this.numeroHabitacion=numeroHabitacion;
 		this.precioHabitacion=precioHabitacion;
 		this.pisoHabitacion=pisoHabitacion;
