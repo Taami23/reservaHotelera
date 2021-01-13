@@ -75,6 +75,7 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+>>>>>>> 0cb3cade9fa157eb1ce4f0b2f227b52dae348c0a
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -141,7 +142,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
     <state x="928" y="216" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1610533382803">

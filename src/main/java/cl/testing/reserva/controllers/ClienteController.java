@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/ReservaHotelera/clientes")
+@RequestMapping("RevervaHotelera/clientes")
 public class ClienteController {
 
     @Autowired
@@ -38,7 +38,7 @@ public class ClienteController {
         }
     }
 
-    @PostMapping(path = {"/update/{id}"})
+    @PostMapping(value = "/update/{id}")
     public ResponseEntity<Cliente> updateCliente(@PathVariable(value = "id") int id,@RequestBody Cliente cliente) {
         try {
             cliente.setIdCliente(id);

@@ -23,7 +23,7 @@ public class HabitacionController {
 	@Autowired
 	private HabitacionService habitacionService;
 	
-	@GetMapping("/")
+	@GetMapping("/list")
 	public ResponseEntity<List<Habitacion>> getAllHabitaciones() throws Exception{
 		System.out.println("HOLA");
 		try{
