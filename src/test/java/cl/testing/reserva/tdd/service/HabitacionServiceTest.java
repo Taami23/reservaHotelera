@@ -77,14 +77,8 @@ public class HabitacionServiceTest {
 	@Test
 	void siDeseaAgregarUnaHabitacionEntoncesLaPuedeAgregar() throws HabitacionAlreadyExistException, HabitacionNotFoundException {
     	//Arrange
-		List<Habitacion> habitaciones = new ArrayList<>();
 		Habitacion habitacionAgregar = new Habitacion("4",20000,2,0);
-		Habitacion habitacionExistente = new Habitacion("1",15000,2,0);
-		Habitacion habitacionExistente1 = new Habitacion("6",15000,2,0);
-		habitaciones.add(habitacionExistente);
-		habitaciones.add(habitacionExistente1);
-		when(habitacionRepository.findAll()).thenReturn(habitaciones);
-		
+
 		habitacionService.agregarHabitacion(habitacionAgregar);
 
 		verify(habitacionRepository, times(1)).save(habitacionAgregar);
@@ -93,13 +87,9 @@ public class HabitacionServiceTest {
 	@Test
 	void siDeseaAgregarUnaHAbitacionYYaExisteArrojaException() throws HabitacionAlreadyExistException, HabitacionNotFoundException{
 		//Arrange
-		List<Habitacion> habitaciones = new ArrayList<Habitacion>();
 		Habitacion habitacionAgregar = new Habitacion("4",20000,2,0);
-		Habitacion habitacionExistente = new Habitacion("4",20000,2,0);
-		Habitacion habitacionExistente1 = new Habitacion("4",20000,2,0);
-		habitaciones.add(habitacionExistente);
-		habitaciones.add(habitacionExistente1);
-		when(habitacionRepository.findAll()).thenReturn(habitaciones);
+		habitacionAgregar.setIdHabitacion(1);
+		when(habitacionRepository.getOne(habitacionAgregar.getIdHabitacion())).thenReturn(habitacionAgregar);
 		
 		assertThrows(HabitacionAlreadyExistException.class, ()-> habitacionService.agregarHabitacion(habitacionAgregar));
 	}
@@ -159,8 +149,50 @@ public class HabitacionServiceTest {
 				 ()-> assertEquals(0,habitacionResultado.isEnUso()));
 	 }
 
+	 //FILTRO PRECIOS
 
+	@Test
+	void siDeseaListarHabitacionesEntreRangosDePrecioYExistenHabitacionesEnEseRangoRetornaUnaLista() throws Exception {
 
+		//Arrange
+		int price1 = 40000;
+		int price2 = 100000;
+		ArrayList<Habitacion> habitaciones=new ArrayList<Habitacion>();
+		List<Habitacion> resultado;
+		habitaciones.add(new Habitacion("1",40000,2,0));
+		habitaciones.add(new Habitacion("6",50000,2,0));
+		habitaciones.add(new Habitacion("11",100000,2,0));
 
+		when(habitacionRepository.findAll()).thenReturn(habitaciones);
+
+		//Act
+		resultado=habitacionService.searchByPrice(price1, price2);
+
+		//Assert
+		assertNotNull(resultado);
+		assertAll("resultado",
+				()-> assertEquals("1",resultado.get(0).getNumeroHabitacion()),
+				()-> assertEquals(40000,resultado.get(0).getPrecioHabitacion()),
+				()-> assertEquals(2,resultado.get(0).getPisoHabitacion()),
+				()-> assertEquals(0,resultado.get(0).isEnUso()),
+
+				()-> assertEquals("6",resultado.get(1).getNumeroHabitacion()),
+				()-> assertEquals(50000,resultado.get(1).getPrecioHabitacion()),
+				()-> assertEquals(2,resultado.get(1).getPisoHabitacion()),
+				()-> assertEquals(0,resultado.get(1).isEnUso()),
+
+				()-> assertEquals("11",resultado.get(2).getNumeroHabitacion()),
+				()-> assertEquals(100000,resultado.get(2).getPrecioHabitacion()),
+				()-> assertEquals(2,resultado.get(2).getPisoHabitacion()),
+				()-> assertEquals(0,resultado.get(2).isEnUso())
+		);
+	}
+
+	@Test
+	void siDeseaListarHabitacionesEntreRangosDePrecioYNoExistenHabitacionesArrojaException() throws HabitacionEmptyListException{
+		int price1 = 40000;
+		int price2 = 100000;
+		assertThrows(HabitacionEmptyListException.class, ()-> habitacionService.searchByPrice(price1, price2));
+	}
 
 }

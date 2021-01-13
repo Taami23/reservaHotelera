@@ -3,10 +3,14 @@ package cl.testing.reserva.controllers;
 import java.util.List;
 
 import cl.testing.reserva.model.Cliente;
+import cl.testing.reserva.model.Habitacion;
 import cl.testing.reserva.service.ClienteService;
+import cl.testing.reserva.service.HabitacionService;
+import cl.testing.reserva.service.HotelService;
 import exceptions.ClienteAlreadyExistsException;
 import exceptions.ClienteNotFoundException;
 import exceptions.ClientesEmptyListException;
+import exceptions.HabitacionNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +23,10 @@ public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
+
+    @Autowired
+    private HabitacionService habitacionService;
+
 
     @GetMapping("/")
     public ResponseEntity<List<Cliente>> getAllClientes() throws ClientesEmptyListException {

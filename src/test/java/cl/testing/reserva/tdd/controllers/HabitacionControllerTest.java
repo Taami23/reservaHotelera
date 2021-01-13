@@ -1,6 +1,7 @@
 package cl.testing.reserva.tdd.controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -10,8 +11,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import cl.testing.reserva.model.Reserva;
 import cl.testing.reserva.controllers.HabitacionController;
 import exceptions.HabitacionEmptyListException;
+import exceptions.ReservaEmptyListException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -81,6 +84,49 @@ public class HabitacionControllerTest {
 		doThrow(new HabitacionEmptyListException()).when(habitacionService).getAllHabitaciones();
 		
 		MockHttpServletResponse response = mockMvc.perform(get("/ReservaHotelera/habitaciones/")
+				.accept(MediaType.APPLICATION_JSON))
+				.andReturn()
+				.getResponse();
+
+		assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
+	}
+
+	@Test
+	void siDeseaListarHabitacionesEntreRangosDePrecioYExistenHabitacionesEnEseRangoRetornaUnaLista() throws Exception {
+		int price1 = 40000;
+		int price2 = 100000;
+		//Given
+		ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();
+		Habitacion h1 = new Habitacion("1",40000,2,0);
+		Habitacion h2 = new Habitacion("6",50000,2,0);
+		Habitacion h3 = new Habitacion("11",100000,2,0);
+		habitaciones.add(h1);
+		habitaciones.add(h2);
+		habitaciones.add(h3);
+
+
+		given(habitacionService.searchByPrice(price1, price2)).willReturn(habitaciones);
+
+		//When
+		MockHttpServletResponse response = mockMvc.perform(get("/ReservaHotelera/habitaciones/search?price1="+price1+"&price2="+price2)
+				.accept(MediaType.APPLICATION_JSON))
+				.andReturn()
+				.getResponse();
+		System.out.println("Response: "+ response.getContentAsString());
+		System.out.println("Json: "+ jsonListaHabitacion.write(habitaciones).getJson());
+
+		//Then
+		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+		assertThat(response.getContentAsString()).isEqualTo(jsonListaHabitacion.write(habitaciones).getJson());
+	}
+
+	@Test
+	void siDeseaListarHabitacionesEntreRangosDePrecioYNoExistenHabitacionesArrojaException() throws Exception {
+		int price1 = 40000;
+		int price2 = 100000;
+		doThrow(new HabitacionEmptyListException()).when(habitacionService).searchByPrice(price1, price2);
+
+		MockHttpServletResponse response = mockMvc.perform(get("/ReservaHotelera/habitaciones/search?price1="+price1+"&price2="+price2)
 				.accept(MediaType.APPLICATION_JSON))
 				.andReturn()
 				.getResponse();

@@ -1,17 +1,15 @@
 package cl.testing.reserva.controllers;
 
+import java.text.ParseException;
 import java.util.List;
 
+import cl.testing.reserva.model.Reserva;
 import exceptions.HabitacionEmptyListException;
+import exceptions.ReservaEmptyListException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import cl.testing.reserva.model.Habitacion;
 import cl.testing.reserva.service.HabitacionService;
@@ -27,6 +25,7 @@ public class HabitacionController {
 	
 	@GetMapping("/")
 	public ResponseEntity<List<Habitacion>> getAllHabitaciones() throws Exception{
+		System.out.println("HOLA");
 		try{
 			List<Habitacion> habitaciones = habitacionService.getAllHabitaciones();
 			return new ResponseEntity<>(habitaciones,HttpStatus.OK);
@@ -40,6 +39,16 @@ public class HabitacionController {
         Habitacion habitacion = habitacionService.buscarHabitacion(id);
         return new ResponseEntity<Habitacion>(habitacion, HttpStatus.OK);
     }
+
+	@GetMapping("/search")
+	public ResponseEntity<List<Habitacion>> searchByPrice(@RequestParam(name = "price1") int price1, @RequestParam(name = "price2") int price2){
+		try{
+			List<Habitacion> habitaciones = habitacionService.searchByPrice(price1, price2);
+			return new ResponseEntity<>(habitaciones, HttpStatus.OK);
+		} catch (HabitacionEmptyListException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 	
 	@PostMapping("/agregar")
 	public ResponseEntity<Habitacion> agregarHabitacion(@RequestBody Habitacion habitacion) throws
