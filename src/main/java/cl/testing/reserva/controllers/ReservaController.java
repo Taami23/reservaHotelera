@@ -1,5 +1,6 @@
 package cl.testing.reserva.controllers;
 
+import cl.testing.reserva.model.Habitacion;
 import cl.testing.reserva.model.Reserva;
 import cl.testing.reserva.service.ReservaService;
 import exceptions.*;
@@ -7,14 +8,10 @@ import exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-
+import java.text.ParseException;
+import java.util.List;
 
 
 @RestController
@@ -23,7 +20,38 @@ public class ReservaController {
 	
 	@Autowired
     private ReservaService reservaService;
-	
+
+	@GetMapping("/{id}")
+	public ResponseEntity<List<Reserva>> getAllReservas(@PathVariable int id) throws Exception{
+		try {
+			List<Reserva> reservas = reservaService.getAllReservas(id);
+			return new ResponseEntity<>(reservas, HttpStatus.OK);
+		}catch (ReservaEmptyListException e){
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@PostMapping("/update/{id}")
+	public ResponseEntity<Reserva> update(@PathVariable int id, Reserva reserva){
+		try {
+			reserva.setIdReserva(id);
+			return new ResponseEntity<Reserva>(reservaService.editarReserva(reserva),HttpStatus.CREATED);
+		} catch (ReservaNotFoundException e) {
+			return new ResponseEntity<Reserva>(HttpStatus.NOT_FOUND);
+		}
+
+	}
+
+	@GetMapping("/search/{id}")
+	public ResponseEntity<List<Reserva>> searchByDates(@PathVariable int id, @RequestParam(name = "fecha1") String fecha1, @RequestParam(name = "fecha2") String fecha2){
+		try{
+			List<Reserva> reservas = reservaService.searchByDates(fecha1, fecha2, id);
+			return new ResponseEntity<>(reservas, HttpStatus.OK);
+		} catch (ReservaEmptyListException | ParseException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
 	@PostMapping("/agregar")
 	public ResponseEntity<Reserva> agregarReserva(@RequestBody Reserva reserva) throws ReservaNotFoundClienteOHabitacion{
 		try {

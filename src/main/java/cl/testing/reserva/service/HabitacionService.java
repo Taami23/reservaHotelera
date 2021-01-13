@@ -1,8 +1,13 @@
 package cl.testing.reserva.service;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import cl.testing.reserva.model.Reserva;
 import exceptions.HabitacionEmptyListException;
+import exceptions.ReservaEmptyListException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cl.testing.reserva.model.Habitacion;
@@ -26,26 +31,29 @@ public class HabitacionService {
 
 
 	public void agregarHabitacion(Habitacion habitacion) throws HabitacionAlreadyExistException, HabitacionNotFoundException {
-		if (getHabitacionByNumero(habitacion.getNumeroHabitacion()) == null) {
+		if (habitacionRepository.getOne(habitacion.getIdHabitacion()) == null) {
 			habitacionRepository.save(habitacion);
 		}else{
 			throw new HabitacionAlreadyExistException();
 		}
 	}
 
-	public Habitacion getHabitacionByNumero(String numeroHabitacion){
-		Habitacion habitacion = null;
+	public List<Habitacion> searchByPrice(int price1, int price2) throws HabitacionEmptyListException{
+		List<Habitacion> habitacionesCliente = new ArrayList<Habitacion>();
 		List<Habitacion> habitaciones = habitacionRepository.findAll();
-		if(!habitaciones.isEmpty()){
-			for (int i = 0; i < habitaciones.size(); i++) {
-				if(habitaciones.get(i).getNumeroHabitacion().equalsIgnoreCase(numeroHabitacion)){
-					return habitaciones.get(i);
-				}
+		if (habitaciones.isEmpty()){
+			throw new HabitacionEmptyListException();
+		}
+		for (Habitacion habitacion : habitaciones){
+			if ((habitacion.getPrecioHabitacion() <= price2) && (habitacion.getPrecioHabitacion()>= price1)){
+				habitacionesCliente.add(habitacion);
 			}
 		}
-		return habitacion;
+		if (habitacionesCliente.isEmpty()){
+			throw new HabitacionEmptyListException();
+		}
+		return habitacionesCliente;
 	}
-
 
 	public void eliminarHabitacion(int id) throws HabitacionNotFoundException {
 		Habitacion habitacionAEliminar = buscarHabitacion(id);
