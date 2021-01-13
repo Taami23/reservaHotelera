@@ -1,7 +1,8 @@
-package cl.testing.reserva.service;
+package cl.testing.reserva.tdd.service;
 
 import cl.testing.reserva.model.Cliente;
 import cl.testing.reserva.repository.ClienteRepository;
+import cl.testing.reserva.service.ClienteService;
 import exceptions.ClienteAlreadyExistsException;
 import exceptions.ClienteNotFoundException;
 import exceptions.ClientesEmptyListException;

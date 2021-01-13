@@ -1,7 +1,8 @@
-package cl.testing.reserva.service;
+package cl.testing.reserva.tdd.service;
 
 import cl.testing.reserva.model.Hotel;
 import cl.testing.reserva.repository.HotelRepository;
+import cl.testing.reserva.service.HotelService;
 import exceptions.HotelAlreadyExistsException;
 import exceptions.HotelNotFoundException;
 

@@ -1,5 +1,6 @@
-package cl.testing.reserva.controllers;
+package cl.testing.reserva.tdd.controllers;
 
+import cl.testing.reserva.controllers.ClienteController;
 import cl.testing.reserva.model.Cliente;
 import cl.testing.reserva.service.ClienteService;
 import static org.mockito.BDDMockito.given;

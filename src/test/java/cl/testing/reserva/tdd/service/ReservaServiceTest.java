@@ -1,4 +1,4 @@
-package cl.testing.reserva.service;
+package cl.testing.reserva.tdd.service;
 
 import cl.testing.reserva.model.Cliente;
 import cl.testing.reserva.model.Habitacion;
@@ -6,6 +6,7 @@ import cl.testing.reserva.model.Reserva;
 import cl.testing.reserva.repository.ClienteRepository;
 import cl.testing.reserva.repository.HabitacionRepository;
 import cl.testing.reserva.repository.ReservaRepository;
+import cl.testing.reserva.service.ReservaService;
 import exceptions.*;
 
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 public class ReservaServiceTest {

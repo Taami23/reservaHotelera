@@ -1,4 +1,4 @@
-package cl.testing.reserva.controllers;
+package cl.testing.reserva.tdd.controllers;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +12,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import cl.testing.reserva.model.Reserva;
+import cl.testing.reserva.controllers.HabitacionController;
 import exceptions.HabitacionEmptyListException;
 import exceptions.ReservaEmptyListException;
 import org.junit.jupiter.api.BeforeEach;

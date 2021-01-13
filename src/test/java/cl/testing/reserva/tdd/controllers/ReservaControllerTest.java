@@ -1,5 +1,6 @@
-package cl.testing.reserva.controllers;
+package cl.testing.reserva.tdd.controllers;
 
+import cl.testing.reserva.controllers.ReservaController;
 import cl.testing.reserva.model.Habitacion;
 import cl.testing.reserva.model.Reserva;
 import cl.testing.reserva.service.ReservaService;
