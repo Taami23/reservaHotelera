@@ -1,4 +1,4 @@
-package cl.testing.reserva.service;
+package cl.testing.reserva.tdd.service;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import cl.testing.reserva.service.HabitacionService;
 import exceptions.HabitacionEmptyListException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

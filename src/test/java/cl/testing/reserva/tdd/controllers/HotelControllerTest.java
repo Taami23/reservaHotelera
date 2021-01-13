@@ -1,10 +1,11 @@
-package cl.testing.reserva.controllers;
+package cl.testing.reserva.tdd.controllers;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
+import cl.testing.reserva.controllers.HotelController;
 import cl.testing.reserva.service.HotelService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import exceptions.HotelAlreadyExistsException;

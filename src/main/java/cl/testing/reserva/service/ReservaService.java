@@ -1,9 +1,6 @@
 package cl.testing.reserva.service;
 
 
-import java.util.List;
-
-import cl.testing.reserva.model.Cliente;
 import cl.testing.reserva.model.Reserva;
 import cl.testing.reserva.repository.ClienteRepository;
 import cl.testing.reserva.repository.HabitacionRepository;

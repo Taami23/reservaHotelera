@@ -1,4 +1,4 @@
-package cl.testing.reserva.controllers;
+package cl.testing.reserva.tdd.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import cl.testing.reserva.controllers.HabitacionController;
 import exceptions.HabitacionEmptyListException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
