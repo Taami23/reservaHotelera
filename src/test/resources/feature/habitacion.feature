@@ -18,10 +18,11 @@ Feature: Servicios asociados a una habitacion
     When deseo agregar una habitacion
     Then obtengo el estado "created" y la habitacion agregada tiene como numero de Habitacion "H12"
 #
-#  Scenario: Agregar un nuevo libro a la biblioteca
-#    Given se tiene un nuevo libro; titulo "Ingenieria de Software", anoPublic 2020, editorial "Pearson", diasPrestamo 10
-#    When solicito se agregue el libro a la biblioteca
-#    Then obtengo el estado "Created" y el libro agregado tiene como titulo "Ingenieria de Software" y dias de prestamo 10
+
+  Scenario: filtrar Habitacion
+    Given se tiene una lista de habitaciones
+    When solicito filtrar las habitaciones por precio entre 10000 y 50000 pesos
+    Then obtengo el estado "ok" y la lista con las habitaciones dentro del rango
 
 
 

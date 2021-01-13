@@ -26,14 +26,17 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public class habitacionStepDefs extends CucumberSpringContextConfiguration {
     @LocalServerPort
     private int port;
 
     Habitacion habitacion;
     Habitacion agregada;
-
+    List<Habitacion> listaHabitaciones;
     private ResponseEntity<Habitacion> responseHabitacion;
+    private ResponseEntity<List<Habitacion>> responseHabitaciones;
 
     @Autowired
     private HabitacionService habitacionService;
@@ -50,7 +53,7 @@ public class habitacionStepDefs extends CucumberSpringContextConfiguration {
     boolean estado;
 
     @After
-    public  void tearDown(){
+    public void tearDown() {
         habitacionRepository.deleteAll();
     }
 
@@ -61,18 +64,18 @@ public class habitacionStepDefs extends CucumberSpringContextConfiguration {
 //    private Integer enUso;
 
     @Given("existe una nueva habitacion; nroHabitacion {string}, precio {int}, pisoHabitacion {int}, enUso {int}")
-    public void existe_una_nueva_habitacion_id_nro_habitacion_precio_piso_habitacion_en_uso(String nroHabitacion, Integer precio, Integer pisoHabitacion, Integer enUso){
-        habitacion = new Habitacion(nroHabitacion, precio,pisoHabitacion,enUso);
+    public void existe_una_nueva_habitacion_id_nro_habitacion_precio_piso_habitacion_en_uso(String nroHabitacion, Integer precio, Integer pisoHabitacion, Integer enUso) {
+        habitacion = new Habitacion(nroHabitacion, precio, pisoHabitacion, enUso);
     }
 
     @When("deseo agregar una habitacion")
     public void deseo_agregar_una_habitacion_a_un_hotel() throws HabitacionNotFoundException, HabitacionAlreadyExistException {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(CONTENT_TYPE, APPLICATION_JSON_VALUE);
-        HttpEntity<Habitacion> entity = new HttpEntity<>(habitacion,httpHeaders);
+        HttpEntity<Habitacion> entity = new HttpEntity<>(habitacion, httpHeaders);
 
         testRestTemplate = new TestRestTemplate();
-        responseHabitacion = testRestTemplate.exchange(createURLWithPort("/ReservaHotelera/habitaciones/agregar"), HttpMethod.POST,entity,Habitacion.class);
+        responseHabitacion = testRestTemplate.exchange(createURLWithPort("/ReservaHotelera/habitaciones/agregar"), HttpMethod.POST, entity, Habitacion.class);
     }
 
     @Then("obtengo el estado {string} y la habitacion agregada tiene como numero de Habitacion {string}")
@@ -84,6 +87,30 @@ public class habitacionStepDefs extends CucumberSpringContextConfiguration {
         assertNotNull(habitacion);
         assertEquals(nroHabitacion, habitacion.getNumeroHabitacion());
 
+    }
+
+    @Given("se tiene una lista de habitaciones")
+    public void se_tiene_una_lista_de_habitaciones() {
+        Habitacion habitacion1 = new Habitacion("H1", 10000, 1, 0);
+        Habitacion habitacion2 = new Habitacion("H2", 13000, 1, 0);
+        Habitacion habitacion3 = new Habitacion("H3", 9000, 2, 0);
+        Habitacion habitacion4 = new Habitacion("H4", 23000, 2, 0);
+        listaHabitaciones.add(habitacion1);
+        listaHabitaciones.add(habitacion2);
+        listaHabitaciones.add(habitacion3);
+        listaHabitaciones.add(habitacion4);
+    }
+
+    @When("solicito filtrar las habitaciones por precio entre {int} y {int} pesos")
+    public void solicito_filtrar_las_habitaciones_por_precio_entre_y_pesos(Integer int1, Integer int2) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @Then("obtengo el estado {string} y la lista con las habitaciones dentro del rango")
+    public void obtengo_el_estado_y_la_lista_con_las_habitaciones_dentro_del_rango(String string) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
     }
 
     private String createURLWithPort(String uri) {
