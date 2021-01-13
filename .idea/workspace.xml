@@ -48,39 +48,21 @@
       <recent name="C:\Spring\workspace\reservaHotelera1\src\test\java\cl\testing\reserva\tdd" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in reservaHotelera1">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.All in reservaHotelera1 (3)">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Scenario: Agregar nueva Habitacion a un Hotel" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
-      <option name="CUCUMBER_CORE_VERSION" value="5" />
-      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/habitacion.feature" />
-      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
-      <module name="reservaHotelera1" />
-      <option name="NAME_FILTER" value="^Agregar nueva Habitacion a un Hotel$" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Agregar nueva Habitacion a un Hotel$&quot;" />
-      <option name="SUGGESTED_NAME" value="Scenario: Agregar nueva Habitacion a un Hotel" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="io.cucumber.core.cli.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
->>>>>>> 0cb3cade9fa157eb1ce4f0b2f227b52dae348c0a
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="All in reservaHotelera1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in reservaHotelera1 (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="reservaHotelera1" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -88,15 +70,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="cl.testing.reserva.tdd in reservaHotelera1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in reservaHotelera1 (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="reservaHotelera1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cl.testing.reserva.tdd.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cl.testing.reserva.tdd" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in reservaHotelera1 (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="reservaHotelera1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in reservaHotelera1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="reservaHotelera1" />
+      <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -122,10 +114,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in reservaHotelera1 (3)" />
+        <item itemvalue="JUnit.All in reservaHotelera1 (2)" />
+        <item itemvalue="JUnit.All in reservaHotelera1 (1)" />
         <item itemvalue="JUnit.All in reservaHotelera1" />
         <item itemvalue="JUnit.cl.testing.reserva.tdd.controllers.* and 1 more" />
-        <item itemvalue="Cucumber Java.Scenario: Agregar nueva Habitacion a un Hotel" />
-        <item itemvalue="JUnit.cl.testing.reserva.tdd in reservaHotelera1" />
       </list>
     </recent_temporary>
   </component>
