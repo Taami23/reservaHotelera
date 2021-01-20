@@ -32,10 +32,9 @@ public class ReservaController {
 	}
 
 	@PostMapping("/update")
-	public ResponseEntity<Reserva> update(@PathVariable int id, Reserva reserva){
-		try {
-			reserva.setIdReserva(id);
-			return new ResponseEntity<Reserva>(reservaService.editarReserva(reserva),HttpStatus.CREATED);
+	public ResponseEntity<Reserva> update(@RequestBody Reserva reserva){
+		try{
+			return new ResponseEntity<Reserva>(reservaService.editarReserva(reserva),HttpStatus.OK);
 		} catch (ReservaNotFoundException e) {
 			return new ResponseEntity<Reserva>(HttpStatus.NOT_FOUND);
 		}

@@ -5,17 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="345b2616-bc5a-4d14-968c-9c6c08be7e10" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" afterPath="$PROJECT_DIR$/.project" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/controllers/ReservaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/controllers/ReservaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/model/Reserva.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/model/Reserva.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/tdd/service/ReservaServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/tdd/service/ReservaServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application-hsqldb.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application-hsqldb.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cl/testing/reserva/model/Habitacion.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cl/testing/reserva/model/Habitacion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/db/initDB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db/initDB.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/db/populateDB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db/populateDB.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/integrationTests/stepsDefs/reservaStepDefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/integrationTests/stepsDefs/reservaStepDefs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/tdd/controllers/ReservaControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/tdd/controllers/ReservaControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/cucumber.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/cucumber.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/reserva.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/reserva.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +52,7 @@
       <recent name="C:\Spring\workspace\reservaHotelera1\src\test\java\cl\testing\reserva\tdd" />
     </key>
   </component>
-  <component name="RunManager" selected="Cucumber Java.Feature: reserva">
+  <component name="RunManager" selected="JUnit.All in reservaHotelera1 (1)">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -67,25 +62,6 @@
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Feature: habitacion" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
-      <option name="CUCUMBER_CORE_VERSION" value="5" />
-      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/habitacion.feature" />
-      <option name="GLUE" value="cl.testing.reserva.integrationTests.stepsDefs" />
-      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
-      <module name="reservaHotelera1" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter" />
-      <option name="SUGGESTED_NAME" value="Feature: habitacion" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="io.cucumber.core.cli.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -108,49 +84,50 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Scenario: Editar Reserva" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
-      <option name="CUCUMBER_CORE_VERSION" value="5" />
-      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/reserva.feature" />
-      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
-      <module name="reservaHotelera1" />
-      <option name="NAME_FILTER" value="^Editar Reserva$" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Editar Reserva$&quot;" />
-      <option name="SUGGESTED_NAME" value="Scenario: Editar Reserva" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="io.cucumber.core.cli.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Scenario: filtrar habitación" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
-      <option name="CUCUMBER_CORE_VERSION" value="5" />
-      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/habitacion.feature" />
-      <option name="GLUE" value="cl.testing.reserva.integrationTests.stepsDefs" />
-      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
-      <module name="reservaHotelera1" />
-      <option name="NAME_FILTER" value="^filtrar habitación$" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^filtrar habitación$&quot;" />
-      <option name="SUGGESTED_NAME" value="Scenario: filtrar habitación" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="io.cucumber.core.cli.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="All in reservaHotelera1 (4)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in reservaHotelera1 (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="reservaHotelera1" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in reservaHotelera1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="reservaHotelera1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReservaControllerTest.SiDeseaEditarLosDatosDeUnaReservaYNoLaEncuentraArrojaException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="reservaHotelera1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cl.testing.reserva.tdd.controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cl.testing.reserva.tdd.controllers" />
+      <option name="MAIN_CLASS_NAME" value="cl.testing.reserva.tdd.controllers.ReservaControllerTest" />
+      <option name="METHOD_NAME" value="SiDeseaEditarLosDatosDeUnaReservaYNoLaEncuentraArrojaException" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReservaControllerTest.siDeseaEditarLosDatosDeUnaReservaYLoEncuentraEntoncesDevuelveLaReservaActualizada" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="reservaHotelera1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cl.testing.reserva.tdd.controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cl.testing.reserva.tdd.controllers" />
+      <option name="MAIN_CLASS_NAME" value="cl.testing.reserva.tdd.controllers.ReservaControllerTest" />
+      <option name="METHOD_NAME" value="siDeseaEditarLosDatosDeUnaReservaYLoEncuentraEntoncesDevuelveLaReservaActualizada" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -164,11 +141,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in reservaHotelera1 (1)" />
+        <item itemvalue="JUnit.ReservaControllerTest.SiDeseaEditarLosDatosDeUnaReservaYNoLaEncuentraArrojaException" />
+        <item itemvalue="JUnit.ReservaControllerTest.siDeseaEditarLosDatosDeUnaReservaYLoEncuentraEntoncesDevuelveLaReservaActualizada" />
+        <item itemvalue="JUnit.All in reservaHotelera1" />
         <item itemvalue="Cucumber Java.Feature: reserva" />
-        <item itemvalue="Cucumber Java.Feature: habitacion" />
-        <item itemvalue="Cucumber Java.Scenario: filtrar habitación" />
-        <item itemvalue="Cucumber Java.Scenario: Editar Reserva" />
-        <item itemvalue="JUnit.All in reservaHotelera1 (4)" />
       </list>
     </recent_temporary>
   </component>
