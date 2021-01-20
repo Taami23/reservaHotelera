@@ -122,7 +122,7 @@ public class ReservaServiceTest {
 
 
 	@Test
-	void siDeseaEditarLosDatosDeUnaHabitacionYLaEncuentraEntoncesDevueleLaHabitacionActualizada() throws ReservaNotFoundException {
+	void siDeseaEditarLosDatosDeUnaReservaYLaEncuentraEntoncesDevueleLaHabitacionActualizada() throws ReservaNotFoundException {
 		//Arrange
 		Reserva reserva = new Reserva(new Date("2020/12/23"), 40000, new Date("2020/12/30"), 1, 1);
 		reserva.setIdReserva(1);

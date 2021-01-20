@@ -1,5 +1,7 @@
 package cl.testing.reserva.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,7 +20,7 @@ public class Reserva {
     private Integer idCliente;
     private Integer idHabitacion;
 
-    public Reserva() {
+    public Reserva(Date fechaInicio, Date fechaTermino, Integer montoFinal, Integer idCliente, Integer idHabitacion) {
     }
 
     public Reserva(Date fechaInicio, Integer montoFinal, Date fechaTermino, Integer idCliente, Integer idHabitacion) {
@@ -29,9 +31,12 @@ public class Reserva {
     	this.idHabitacion = idHabitacion;
     }
 
-    
+	public Reserva() {
 
-    public Integer getIdReserva() {
+	}
+
+
+	public Integer getIdReserva() {
 		return idReserva;
 	}
 

@@ -31,7 +31,7 @@ public class ReservaController {
 		}
 	}
 
-	@PostMapping("/update/{id}")
+	@PostMapping("/update")
 	public ResponseEntity<Reserva> update(@PathVariable int id, Reserva reserva){
 		try {
 			reserva.setIdReserva(id);
@@ -39,7 +39,6 @@ public class ReservaController {
 		} catch (ReservaNotFoundException e) {
 			return new ResponseEntity<Reserva>(HttpStatus.NOT_FOUND);
 		}
-
 	}
 
 	@GetMapping("/search/{id}")
