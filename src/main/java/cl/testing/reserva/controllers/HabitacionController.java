@@ -25,7 +25,6 @@ public class HabitacionController {
 	
 	@GetMapping("/")
 	public ResponseEntity<List<Habitacion>> getAllHabitaciones() throws Exception{
-		System.out.println("HOLA");
 		try{
 			List<Habitacion> habitaciones = habitacionService.getAllHabitaciones();
 			return new ResponseEntity<>(habitaciones,HttpStatus.OK);

@@ -23,6 +23,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class ReservaServiceTest {
@@ -114,7 +115,7 @@ public class ReservaServiceTest {
 		//Arrange
 		Reserva reserva = new Reserva(new Date("2020/12/23"), 40000, new Date("2020/12/30"), 1, 1);
 		reserva.setIdReserva(1);
-		when(reservaRepository.getOne(1)).thenReturn(null);
+		when(reservaRepository.findById(1)).thenReturn(null);
 
 		//Act + Assert
 		assertThrows(ReservaNotFoundException.class, ()-> reservaService.editarReserva(reserva));
@@ -126,7 +127,8 @@ public class ReservaServiceTest {
 		//Arrange
 		Reserva reserva = new Reserva(new Date("2020/12/23"), 40000, new Date("2020/12/30"), 1, 1);
 		reserva.setIdReserva(1);
-		when(reservaRepository.getOne(1)).thenReturn(reserva);
+		Optional<Reserva> reserva2 = Optional.of(reserva);
+		when(reservaRepository.findById(1)).thenReturn(reserva2);
 		when(reservaRepository.save(reserva)).thenReturn(reserva);
 
 		reserva.setMontoFinal(50000);

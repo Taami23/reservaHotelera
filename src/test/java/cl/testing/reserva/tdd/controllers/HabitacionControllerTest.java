@@ -112,8 +112,7 @@ public class HabitacionControllerTest {
 				.accept(MediaType.APPLICATION_JSON))
 				.andReturn()
 				.getResponse();
-		System.out.println("Response: "+ response.getContentAsString());
-		System.out.println("Json: "+ jsonListaHabitacion.write(habitaciones).getJson());
+
 
 		//Then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());

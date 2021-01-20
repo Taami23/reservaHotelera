@@ -43,38 +43,6 @@ public class habitacionStepDefs {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
-    @Given("existe una nueva habitacion; nroHabitacion {string}, precio {int}, pisoHabitacion {int}, enUso {int}")
-    public void existe_una_nueva_habitacion_id_nro_habitacion_precio_piso_habitacion_en_uso(String nroHabitacion, Integer precio, Integer pisoHabitacion, Integer enUso){
-//        System.out.println("Size "+habitacionRepository.findAll().size());
-        habitacion = new Habitacion(nroHabitacion, precio,pisoHabitacion,enUso);
-    }
-
-    @When("deseo agregar una habitacion")
-    public void deseo_agregar_una_habitacion_a_un_hotel() throws HabitacionNotFoundException, HabitacionAlreadyExistException {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(CONTENT_TYPE, APPLICATION_JSON_VALUE);
-        HttpEntity<Habitacion> entity = new HttpEntity<>(habitacion,httpHeaders);
-
-        testRestTemplate = new TestRestTemplate();
-        responseHabitacion = testRestTemplate.exchange(createURLWithPort("/ReservaHotelera/habitaciones/agregar"), HttpMethod.POST,entity,Habitacion.class);
-    }
-
-    @Then("obtengo el estado {string} y la habitacion agregada tiene como numero de Habitacion {string}")
-    public void otendo_el_estado_true_y_la_habitacion_agregada_tiene_como_numero_de_habitacion(String estado, String nroHabitacion) {
-
-        assertEquals(estado.toUpperCase(), responseHabitacion.getStatusCode().name().toString());
-
-        habitacion = responseHabitacion.getBody();
-//        List<Habitacion> list = habitacionRepository.findAll();
-//        for (int i = 0; i < list.size(); i++) {
-//            System.out.println("Habitacion"+list.get(i).getNumeroHabitacion());
-//        }
-        System.out.println(habitacion.getIdHabitacion());
-        assertNotNull(habitacion);
-        assertEquals(nroHabitacion, habitacion.getNumeroHabitacion());
-        habitacionRepository.delete(habitacion);
-
-    }
 
     @Given("una lista de habitaciones")
     public void una_lista_de_habitaciones() throws HabitacionNotFoundException, HabitacionAlreadyExistException {
@@ -105,10 +73,7 @@ public class habitacionStepDefs {
     @Then("obtengo el estado {string} y una lista de habitaciones dentro del rango")
     public void obtengo_el_estado_y_una_lista_de_habitaciones_dentro_del_rango(String estado) {
         assertEquals(estado.toUpperCase(), responseHabitaciones.getStatusCode().name().toString());
-//        List<Habitacion> list = habitacionRepository.findAll();
-//        for (int i = 0; i < list.size(); i++) {
-//            System.out.println("Habitacion"+list.get(i).getNumeroHabitacion());
-//        }
+
         habitacionesFiltradas = responseHabitaciones.getBody();
         assertNotNull(habitaciones);
         assertAll("habitaciones",

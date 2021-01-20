@@ -73,8 +73,6 @@ public class ReservaControllerTest {
                             .accept(MediaType.APPLICATION_JSON))
                             .andReturn()
                             .getResponse();
-        System.out.println("Response: "+ response.getContentAsString());
-        System.out.println("Json: "+ jsonListaReservas.write(reservas).getJson());
 
         //Then
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -114,8 +112,6 @@ public class ReservaControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn()
                 .getResponse();
-        System.out.println("Response: "+ response.getContentAsString());
-        System.out.println("Json: "+ jsonListaReservas.write(reservas).getJson());
 
         //Then
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());

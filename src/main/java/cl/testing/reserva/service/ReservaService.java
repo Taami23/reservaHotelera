@@ -49,29 +49,22 @@ public class ReservaService {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy/mm/dd");
 		Date fechaI = format.parse(fecha1);
 		Date fechaT = format.parse(fecha2);
-		System.out.println(fechaI.toString());
-		System.out.println(fechaT.toString());
 		if (reservas.isEmpty()){
-			System.out.println("holis");
 			throw new ReservaEmptyListException();
 		}
 		for (Reserva reserva : reservas){
-			System.out.println(reserva.getFechaInicio().toString());
-			System.out.println(reserva.getFechaInicio().getTime());
-			System.out.println(fechaI.getTime());
 			if ((reserva.getIdCliente() == idCliente) && (reserva.getFechaInicio().getTime() <= fechaT.getTime()) && (reserva.getFechaInicio().getTime()>= fechaI.getTime())){
 				reservasCliente.add(reserva);
 			}
 		}
 		if (reservasCliente.isEmpty()){
-			System.out.println("caca");
 			throw new ReservaEmptyListException();
 		}
 		return reservasCliente;
 	}
 
 	public Reserva editarReserva(Reserva reserva) throws ReservaNotFoundException {
-		if	(reservaRepository.getOne(reserva.getIdReserva()) == null) {
+		if	(reservaRepository.findById(reserva.getIdReserva()) == null) {
 			throw new ReservaNotFoundException();
 		}
 		return reservaRepository.save(reserva);

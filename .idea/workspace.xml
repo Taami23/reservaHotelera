@@ -5,13 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="345b2616-bc5a-4d14-968c-9c6c08be7e10" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/controllers/ReservaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/controllers/ReservaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/controllers/HabitacionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/controllers/HabitacionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/service/HabitacionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/service/HabitacionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/service/ReservaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/service/ReservaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/populateDB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/populateDB.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/integrationTests/stepsDefs/habitacionStepDefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/integrationTests/stepsDefs/habitacionStepDefs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/integrationTests/stepsDefs/reservaStepDefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/integrationTests/stepsDefs/reservaStepDefs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/tdd/controllers/HabitacionControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/tdd/controllers/HabitacionControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/tdd/controllers/ReservaControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/tdd/controllers/ReservaControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/cucumber.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/cucumber.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application-hsqldb.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application-hsqldb.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/db/initDB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db/initDB.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/tdd/service/ReservaServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cl/testing/reserva/tdd/service/ReservaServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/habitacion.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/habitacion.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/reserva.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/reserva.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cl/testing/reserva/controllers/HabitacionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cl/testing/reserva/controllers/HabitacionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cl/testing/reserva/service/HabitacionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cl/testing/reserva/service/HabitacionService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/db/populateDB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db/populateDB.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,14 +65,16 @@
       <recent name="C:\Spring\workspace\reservaHotelera1\src\test\java\cl\testing\reserva\tdd" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in reservaHotelera1 (1)">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.All in reservaHotelera1 (2)">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -78,23 +87,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in reservaHotelera1 (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="reservaHotelera1" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="All in reservaHotelera1 (4)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="reservaHotelera1" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="All in reservaHotelera1 (5)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in reservaHotelera1 (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="reservaHotelera1" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -110,6 +103,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ReservaServiceTest.siDeseaEditarLosDatosDeUnaHabitacionYLaEncuentraEntoncesDevueleLaHabitacionActualizada" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="reservaHotelera1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cl.testing.reserva.tdd.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cl.testing.reserva.tdd.service" />
+      <option name="MAIN_CLASS_NAME" value="cl.testing.reserva.tdd.service.ReservaServiceTest" />
+      <option name="METHOD_NAME" value="siDeseaEditarLosDatosDeUnaHabitacionYLaEncuentraEntoncesDevueleLaHabitacionActualizada" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReservaServiceTest.siDeseaEditarLosDatosDeUnaReservaYNoLaEncuentraEntoncesSeArrojaException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="reservaHotelera1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cl.testing.reserva.tdd.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cl.testing.reserva.tdd.service" />
+      <option name="MAIN_CLASS_NAME" value="cl.testing.reserva.tdd.service.ReservaServiceTest" />
+      <option name="METHOD_NAME" value="siDeseaEditarLosDatosDeUnaReservaYNoLaEncuentraEntoncesSeArrojaException" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ReservaHotelera1Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="reservaHotelera1" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="cl.testing.reserva.ReservaHotelera1Application" />
@@ -119,11 +144,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in reservaHotelera1 (2)" />
         <item itemvalue="JUnit.All in reservaHotelera1 (1)" />
+        <item itemvalue="JUnit.ReservaServiceTest.siDeseaEditarLosDatosDeUnaReservaYNoLaEncuentraEntoncesSeArrojaException" />
+        <item itemvalue="JUnit.ReservaServiceTest.siDeseaEditarLosDatosDeUnaHabitacionYLaEncuentraEntoncesDevueleLaHabitacionActualizada" />
         <item itemvalue="JUnit.All in reservaHotelera1" />
-        <item itemvalue="JUnit.All in reservaHotelera1 (5)" />
-        <item itemvalue="JUnit.All in reservaHotelera1 (4)" />
-        <item itemvalue="JUnit.All in reservaHotelera1 (3)" />
       </list>
     </recent_temporary>
   </component>

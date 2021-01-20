@@ -31,7 +31,6 @@ public class HabitacionService {
 
 
 	public void agregarHabitacion(Habitacion habitacion) throws HabitacionAlreadyExistException, HabitacionNotFoundException {
-		System.out.println("holi" + habitacion.getIdHabitacion());
 		if(habitacion.getIdHabitacion()==null){
 			habitacionRepository.save(habitacion);
 		}else{

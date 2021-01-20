@@ -3,15 +3,12 @@ package cl.testing.reserva.integrationTests.stepsDefs;
 
 import cl.testing.reserva.model.Habitacion;
 import cl.testing.reserva.model.Cliente;
+import cl.testing.reserva.repository.HabitacionRepository;
 import cl.testing.reserva.repository.ReservaRepository;
 import cl.testing.reserva.service.ClienteService;
-import cl.testing.reserva.service.HabitacionService;
 import cl.testing.reserva.service.ReservaService;
-import exceptions.HabitacionAlreadyExistException;
-import exceptions.HabitacionAlreadyInUse;
-import exceptions.HabitacionNotFoundException;
-import exceptions.ReservaNotFoundClienteOHabitacion;
 import cl.testing.reserva.model.Reserva;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -24,9 +21,8 @@ import exceptions.ClienteAlreadyExistsException;
 import exceptions.ClienteNotFoundException;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
-import org.springframework.core.ParameterizedTypeReference;
 
-import java.net.URI;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,6 +31,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+//@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class reservaStepDefs {
     @LocalServerPort
     private int port;
@@ -43,6 +40,7 @@ public class reservaStepDefs {
     Habitacion habitacion;
     Habitacion habitacion2;
     Reserva reserva;
+    Reserva reservaEditada;
     List<Reserva> reservas = new ArrayList<>();
     List<Reserva> reservasEncontradas = new ArrayList<>();
 
@@ -54,6 +52,8 @@ public class reservaStepDefs {
 
     @Autowired
     private ReservaRepository reservaRepository;
+    @Autowired
+    private HabitacionRepository habitacionRepository;
 
     @Autowired
     private ClienteService clienteService;
@@ -102,6 +102,7 @@ public class reservaStepDefs {
                 ()->assertEquals(1, reservasEncontradas.get(1).getIdCliente()),
                 ()->assertEquals(2, reservasEncontradas.get(1).getIdHabitacion())
         );
+        reservaRepository.deleteAll();
     }
 
     @Given("existe un cliente; id {int}, nombre {string}, rut {string}, fechaNaci {string}, telefono {string}, email {string}, contrasena {string}")
@@ -114,33 +115,6 @@ public class reservaStepDefs {
 
 
     }
-//    @Given("una lista de reservas")
-//    public void una_lista_de_reservas() throws ParseException, HabitacionAlreadyExistException, HabitacionNotFoundException, ReservaNotFoundClienteOHabitacion, HabitacionAlreadyInUse {
-//
-//
-//        habitacion = new Habitacion("H50", 300000, 4, 0);
-//        habitacion2 = new Habitacion("H60", 150000, 3, 0);
-//        habitacion.setIdHabitacion(1);
-//        habitacion2.setIdHabitacion(2);
-//        habitacionService.agregarHabitacion(habitacion);
-//        habitacionService.agregarHabitacion(habitacion2);
-//
-//
-//        SimpleDateFormat objSDF = new SimpleDateFormat("dd-mm-yyyy");
-//        Date fecIngreso = objSDF.parse("15-08-2020");
-//        Date fecSalida = objSDF.parse("15-09-2020");
-//
-//        reserva = new Reserva(fecIngreso, 300000, fecSalida, cliente.getIdCliente(), habitacion.getIdHabitacion());
-//        reservaService.agregarReserva(reserva);
-//        reservas.add(reserva);
-//
-//        fecIngreso = objSDF.parse("15-09-2020");
-//        fecSalida = objSDF.parse("15-10-2020");
-//
-//        reserva = new Reserva(fecIngreso, 300000, fecSalida, cliente.getIdCliente(), habitacion2.getIdHabitacion());
-//        reservaService.agregarReserva(reserva);
-//        reservas.add(reserva);
-//    }
 
 
 
@@ -173,19 +147,56 @@ public class reservaStepDefs {
                 ()->assertEquals(1, reservasEncontradas.get(1).getIdCliente()),
                 ()->assertEquals(2, reservasEncontradas.get(1).getIdHabitacion())
         );
-        /*
-        habitacionesFiltradas = responseHabitaciones.getBody();
-        assertNotNull(habitaciones);
-        assertAll("habitaciones",
-                () -> assertEquals("H1", habitacionesFiltradas.get(0).getNumeroHabitacion()),
-                () -> assertEquals(15000, habitacionesFiltradas.get(0).getPrecioHabitacion()),
-                () -> assertEquals("H2", habitacionesFiltradas.get(1).getNumeroHabitacion()),
-                () -> assertEquals(17000, habitacionesFiltradas.get(1).getPrecioHabitacion()),
-                () -> assertEquals("H4", habitacionesFiltradas.get(2).getNumeroHabitacion()),
-                () -> assertEquals(19000, habitacionesFiltradas.get(2).getPrecioHabitacion())
-        );
-        */
+        reservaRepository.deleteAll();
+    }
 
+    @Given("existe una reserva; fechaInicio {string}, fechaTermino {string}, montoFinal {int}, idCliente {int}, idHabitacion {int}")
+    public void existe_una_reserva_fecha_inicio_fecha_termino_monto_final_id_cliente_id_habitacion(String fechaInicio, String fechaTermino, Integer montoFinal, Integer idCliente, Integer idHabitacion) throws ParseException {
+        // Write code here that turns the phrase above into concrete actions
+        //throw new io.cucumber.java.PendingException();
+        String sFechaInicioDate= fechaInicio;
+        Date fechaInicioDate = new SimpleDateFormat("yyyy/MM/dd").parse(sFechaInicioDate);
+
+        String sFechaTerminoDate= fechaTermino;
+        Date fechaTerminoDate = new SimpleDateFormat("yyyy/MM/dd").parse(sFechaTerminoDate);
+
+        reserva = new Reserva(fechaInicioDate,montoFinal,fechaTerminoDate,idCliente,idHabitacion);
+        reservaRepository.save(reserva);
+
+    }
+
+    @When("deseo editar la fecha de termino a {string} de la reserva")
+    public void deseo_editar_la_fecha_de_termino_a_de_la_reserva(String fechaTerminoNueva) throws ParseException {
+        // Write code here that turns the phrase above into concrete actions
+
+        String sFechaTerminoNueva = fechaTerminoNueva;
+        Date fechaTerminoDateNueva = new SimpleDateFormat("yyyy/MM/dd").parse(sFechaTerminoNueva);
+        reserva.setFechaTermino(fechaTerminoDateNueva);
+        reserva.setIdReserva(13);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(CONTENT_TYPE, APPLICATION_JSON_VALUE);
+        HttpEntity<Reserva> entity = new HttpEntity<>(reserva,httpHeaders);
+        testRestTemplate = new TestRestTemplate();
+        responseReserva = testRestTemplate.exchange(createURLWithPort("/ReservaHotelera" +
+                        "/reservas/update"),
+                HttpMethod.POST,
+                entity,
+                Reserva.class);
+    }
+
+    @Then("me aseguro que los campos tengan datos correctos y obtengo el estado {string}")
+    public void me_aseguro_que_los_campos_tengan_datos_correctos_y_obtengo_el_estado(String estado) {
+        // Write code here that turns the phrase above into concrete actions
+        reserva = responseReserva.getBody();
+        assertNotNull(reserva);
+        assertEquals(13,reserva.getIdReserva());
+        assertEquals(new Date("2020/01/01"), reserva.getFechaInicio());
+        assertEquals(new Date("2020/03/03"), reserva.getFechaTermino());
+        assertEquals(20000, reserva.getMontoFinal());
+        assertEquals(1, reserva.getIdCliente());
+        assertEquals(1, reserva.getIdHabitacion());
+        assertEquals(estado.toUpperCase(), responseReserva.getStatusCode().name().toString());
+        //reservaRepository.delete(reserva);
     }
 
     private String createURLWithPort(String uri) {
