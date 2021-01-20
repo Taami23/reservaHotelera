@@ -138,17 +138,20 @@ public class ReservaControllerTest {
     @Test
     void siDeseaEditarLosDatosDeUnaReservaYLoEncuentraEntoncesDevuelveLaReservaActualizada() throws Exception {
         Reserva reservaBuscada = new Reserva(new Date("2021/01/08"), 100000, new Date("2021/01/20"), 3, 3);
+        reservaBuscada.setIdReserva(1);
         int nuevoPrecio = 90000;
+
+        given(reservaService.editarReserva(any(reservaBuscada.getClass()))).willReturn(reservaBuscada);
         reservaBuscada.setMontoFinal(nuevoPrecio);
 
         //When
-        MockHttpServletResponse response = mockMvc.perform(post("/ReservaHotelera/reservas/update/1")
+        MockHttpServletResponse response = mockMvc.perform(post("/ReservaHotelera/reservas/update")
                 .contentType(MediaType.APPLICATION_JSON).content(jsonReserva.write(reservaBuscada).getJson()))
                 .andReturn()
                 .getResponse();
 
         //Then
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
         assertThat(response.equals(jsonReserva));
     }
 
@@ -159,7 +162,7 @@ public class ReservaControllerTest {
 
         doThrow(new ReservaNotFoundException()).when(reservaService).editarReserva(ArgumentMatchers.any(Reserva.class));
 
-        MockHttpServletResponse response = mockMvc.perform(post("/ReservaHotelera/reservas/update/1")
+        MockHttpServletResponse response = mockMvc.perform(post("/ReservaHotelera/reservas/update")
                 .contentType(MediaType.APPLICATION_JSON).content(jsonReserva.write(reservaBuscada).getJson()))
                 .andReturn()
                 .getResponse();
