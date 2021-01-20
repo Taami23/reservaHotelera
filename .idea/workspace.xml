@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="345b2616-bc5a-4d14-968c-9c6c08be7e10" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/controllers/HabitacionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/controllers/HabitacionController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/service/HabitacionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/service/HabitacionService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/service/ReservaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cl/testing/reserva/service/ReservaService.java" afterDir="false" />
@@ -20,6 +21,7 @@
       <change beforePath="$PROJECT_DIR$/target/classes/cl/testing/reserva/controllers/HabitacionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cl/testing/reserva/controllers/HabitacionController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/cl/testing/reserva/service/HabitacionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cl/testing/reserva/service/HabitacionService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/db/populateDB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db/populateDB.sql" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,16 +49,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../SistemaPrestamos" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -65,7 +63,9 @@
       <recent name="C:\Spring\workspace\reservaHotelera1\src\test\java\cl\testing\reserva\tdd" />
     </key>
   </component>
+
   <component name="RunManager" selected="JUnit.All in reservaHotelera1 (2)">
+
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -79,15 +79,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in reservaHotelera1 (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Feature: reserva" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/reserva.feature" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
       <module name="reservaHotelera1" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter" />
+      <option name="SUGGESTED_NAME" value="Feature: reserva" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+
     <configuration name="All in reservaHotelera1 (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+
       <module name="reservaHotelera1" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -103,6 +115,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+
     <configuration name="ReservaServiceTest.siDeseaEditarLosDatosDeUnaHabitacionYLaEncuentraEntoncesDevueleLaHabitacionActualizada" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="reservaHotelera1" />
       <extension name="coverage">
@@ -119,6 +132,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+
     <configuration name="ReservaServiceTest.siDeseaEditarLosDatosDeUnaReservaYNoLaEncuentraEntoncesSeArrojaException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="reservaHotelera1" />
       <extension name="coverage">
@@ -130,6 +144,7 @@
       <option name="PACKAGE_NAME" value="cl.testing.reserva.tdd.service" />
       <option name="MAIN_CLASS_NAME" value="cl.testing.reserva.tdd.service.ReservaServiceTest" />
       <option name="METHOD_NAME" value="siDeseaEditarLosDatosDeUnaReservaYNoLaEncuentraEntoncesSeArrojaException" />
+
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -161,8 +176,8 @@
       <option name="presentableId" value="Default" />
       <updated>1610532239981</updated>
       <workItem from="1610532241305" duration="2204000" />
-      <workItem from="1611102074935" duration="1936000" />
-      <workItem from="1611104497144" duration="13850000" />
+      <workItem from="1611026429446" duration="6814000" />
+      <workItem from="1611105475915" duration="14461000" />
     </task>
     <servers />
   </component>
